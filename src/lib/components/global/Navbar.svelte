@@ -3,6 +3,7 @@
 	import LogoWordmark from "../logos/LogoWordmark.svelte";
 	import Noise from "../util/Noise.svelte";
 	import clsx from "clsx";
+	import { goto } from "$app/navigation";
 
 	let searchOpen = false;
 	let jsRun = false;
@@ -21,13 +22,28 @@
 		searchOpen = false;
 	};
 
+	const search = (e: KeyboardEvent) => {
+		setTimeout(() => {
+			const input = searchBtn.querySelector("input")!;
+			if (input.value.trim() === "") {
+				goto("/", {
+					keepFocus: true,
+				});
+			} else {
+				goto(`/search/${input.value}`, {
+					keepFocus: true,
+				});
+			}
+		});
+	};
+
 	onMount(() => {
 		jsRun = true;
 	});
 </script>
 
 <div
-	class="fixed left-1/2 z-50 flex h-24 w-full -translate-x-1/2 items-center justify-center border-b border-dashed border-neutral-700 bg-black/65 px-8 shadow-xl shadow-black/75 backdrop-blur-md"
+	class="fixed z-50 flex h-24 w-screen items-center justify-center border-b border-dashed border-neutral-700 bg-black/65 px-8 shadow-xl shadow-black/75 backdrop-blur-md"
 >
 	<div class="flex h-full w-full max-w-[1400px] items-center justify-center">
 		<div class="flex flex-grow items-center">
@@ -83,9 +99,10 @@
 						<input
 							tabindex={searchOpen ? 0 : -1}
 							on:blur={closeSearch}
-							class="h-full w-full px-4"
+							class="h-full w-full px-4 pr-10"
 							type="text"
 							placeholder="Search"
+							on:keydown={search}
 						/>
 					</div>
 				{/if}

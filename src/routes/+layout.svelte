@@ -5,6 +5,7 @@
 	import Noise from "$lib/components/util/Noise.svelte";
 	import Navbar from "$lib/components/global/Navbar.svelte";
 	import "iconify-icon";
+	import { onMount } from "svelte";
 </script>
 
 <Navbar />
