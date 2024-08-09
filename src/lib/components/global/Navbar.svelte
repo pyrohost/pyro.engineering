@@ -3,11 +3,18 @@
 	import LogoWordmark from "../logos/LogoWordmark.svelte";
 	import Noise from "../util/Noise.svelte";
 	import clsx from "clsx";
-	import { goto } from "$app/navigation";
+	import { goto, onNavigate } from "$app/navigation";
+	import { page } from "$app/stores";
+	import { searchValue } from "$lib/store";
+	import { transition } from "$lib/constants";
 
-	let searchOpen = false;
+	let searchOpen = $page.url.pathname.startsWith("/search/");
 	let jsRun = false;
 	let searchBtn: HTMLButtonElement;
+
+	const duration = "400ms";
+
+	$: if (!searchOpen) $searchValue = "";
 
 	const openSearch = () => {
 		searchOpen = true;
@@ -40,6 +47,13 @@
 	onMount(() => {
 		jsRun = true;
 	});
+
+	onNavigate((e) => {
+		// if the input is focused, don't close the search
+		const input = searchBtn.querySelector("input")!;
+		if (input === document.activeElement) return;
+		searchOpen = e.to?.url.pathname.startsWith("/search/") || false;
+	});
 </script>
 
 <div
@@ -63,18 +77,16 @@
 					"w-72 cursor-default hover:!bg-[#191919] active:!bg-[#191919]": searchOpen,
 					"w-12": !searchOpen,
 				})}
-				style="transition: width 200ms ease-out;"
+				style="transition: width {duration} {transition};"
 				bind:this={searchBtn}
 				on:click={openSearch}
 			>
 				<div
-					class={clsx(
-						"absolute top-0 flex h-full w-full items-center justify-center transition-opacity duration-200 ease-out",
-						{
-							"pointer-events-auto opacity-0": searchOpen,
-							"pointer-events-none opacity-100": !searchOpen,
-						},
-					)}
+					class={clsx("absolute top-0 flex h-full w-full items-center justify-center", {
+						"pointer-events-auto opacity-0": searchOpen,
+						"pointer-events-none opacity-100": !searchOpen,
+					})}
+					style="transition: opacity {duration} {transition};"
 				>
 					Search
 				</div>
@@ -82,12 +94,13 @@
 				{#if jsRun}
 					<div
 						class={clsx(
-							"absolute top-0 flex h-full w-full items-center justify-center transition-opacity duration-200 ease-out",
+							"absolute top-0 flex h-full w-full items-center justify-center",
 							{
 								"pointer-events-none opacity-0": !searchOpen,
 								"pointer-events-auto opacity-100": searchOpen,
 							},
 						)}
+						style="transition: opacity {duration} {transition};"
 					>
 						<button
 							tabindex={searchOpen ? 0 : -1}
@@ -97,6 +110,7 @@
 							<iconify-icon icon="heroicons-solid:search" class="text-white/50" />
 						</button>
 						<input
+							bind:value={$searchValue}
 							tabindex={searchOpen ? 0 : -1}
 							on:blur={closeSearch}
 							class="h-full w-full px-4 pr-10"
