@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ferosBg from "$lib/assets/feros-bg.png";
-	import PostsPreview from "$lib/components/landing/PostsPreview.svelte";
+	import PostsPreview from "$lib/components/landing/PostPreviews.svelte";
 	import type { PageData } from "./$types";
 
 	export let data: PageData;

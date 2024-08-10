@@ -17,6 +17,8 @@
 
 	let onSearchToggle = () => {};
 
+	export let isFirefox = false;
+
 	$: if (!searchOpen) setTimeout(() => ($searchValue = ""), 100);
 
 	$: {
@@ -139,7 +141,7 @@
 		<div
 			class="pointer-events-none absolute left-1/2 top-0 -z-10 mt-[1px] h-full w-full max-w-[1400px] -translate-x-1/2 border-b border-dashed border-neutral-800"
 		>
-			<Noise colour="#666" />
+			<Noise colour={isFirefox ? "#222" : "#666"} />
 		</div>
 	</div>
 </div>
