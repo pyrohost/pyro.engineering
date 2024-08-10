@@ -1,9 +1,9 @@
 import { read } from "$app/server";
-import { getAllPosts, titleToSlug } from "$lib/util/index.js";
+import { titleToSlug } from "$lib/util/index.js";
 import { compile } from "mdsvex";
 import { convert } from "html-to-text";
 
-export async function GET({}) {
+export async function GET({ request }) {
 	const posts = import.meta.glob("/src/lib/posts/*.svx");
 	const postStrings = await Promise.all(
 		Object.keys(posts).map(async (p) => await read(p).text()),
@@ -72,12 +72,6 @@ export async function GET({}) {
 	);
 
 	return new Response(
-		// JSON.stringify(
-		// 	posts.map((p) => ({
-		// 		...p.metadata,
-		//         html: compile(p.content).code,
-		// 	})),
-		// ),
 		`<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 
@@ -93,12 +87,12 @@ export async function GET({}) {
         <link>https://pyro.engineering</link>
     </image>
     ${postsRendered.map(
-		(p) => `        <item>
-            <title>${p.metadata.title}</title>
-            <link>https://pyro.engineering/posts/${titleToSlug(p.metadata.title)}</link>
-            <description>${p.code.trim().split("\n")[0]}</description>
-            <pubDate>${p.metadata.date.toUTCString()}</pubDate>
-        </item>`,
+		(p) => `<item>
+        <title>${p.metadata.title}</title>
+        <link>https://pyro.engineering/posts/${titleToSlug(p.metadata.title)}</link>
+        <description>${p.code.trim().split("\n")[0]}</description>
+        <pubDate>${p.metadata.date.toUTCString()}</pubDate>
+	</item>`,
 	)}
     </channel>
 </rss>`,

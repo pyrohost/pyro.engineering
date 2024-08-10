@@ -1,6 +1,6 @@
 ---
 title: How Pyro uses NixOS to power global gaming infrastructure
-date: 2021-07-01
+date: 2024-08-10
 authors: 
     - "Elizabeth"
     - "Evan"

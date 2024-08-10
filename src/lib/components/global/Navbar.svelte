@@ -87,7 +87,7 @@
 			</a>
 		</div>
 		<div class="flex flex-shrink-0 items-center gap-6">
-			<a class="btn !h-12 !w-12 !min-w-0 !px-0" href="##">
+			<a class="btn !h-12 !w-12 !min-w-0 !px-0" href="/rss.xml" target="_blank">
 				<iconify-icon icon="heroicons-solid:rss" class="text-xl" />
 			</a>
 			<button
