@@ -7,7 +7,12 @@ const config = {
 	extensions: [".svelte", ".svx"],
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: [vitePreprocess(), mdsvex()],
+	preprocess: [
+		vitePreprocess(),
+		mdsvex({
+			smartypants: true,
+		}),
+	],
 
 	kit: {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.

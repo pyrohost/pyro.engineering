@@ -10,7 +10,7 @@
 	opacity="1"
 	><defs
 		><filter
-			id="nnnoise-filter"
+			id="innnoise-filter"
 			x="-20%"
 			y="-20%"
 			width="140%"
@@ -50,6 +50,6 @@
 		width="100%"
 		height="100%"
 		fill={colour}
-		filter="url(#nnnoise-filter)"
+		filter="url(#innnoise-filter)"
 	></rect></svg
 >

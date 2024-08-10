@@ -1,0 +1,9 @@
+---
+title: right post
+date: 2024-02-8
+authors: 
+    - "nullptr"
+image: placeholder.png
+---
+
+this post should be halfwidth and aligned right.

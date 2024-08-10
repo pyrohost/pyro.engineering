@@ -1,0 +1,11 @@
+---
+title: large post
+date: 2024-02-7
+authors: 
+    - "Elizabeth"
+    - "Evan"
+    - "nullptr"
+image: placeholder.png
+---
+
+this post should be large, like the top one.

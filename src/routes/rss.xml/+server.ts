@@ -14,7 +14,7 @@ export async function GET({ request }) {
 				(p) =>
 					({
 						code: convert(p?.code || "", {
-							wordwrap: Infinity,
+							wordwrap: (p?.code?.length || 0) + 8,
 							selectors: [
 								{
 									selector: "h1",
@@ -40,6 +40,23 @@ export async function GET({ request }) {
 									selector: "h6",
 									format: "skip",
 								},
+								// all tables
+								{
+									selector: "table",
+									format: "skip",
+								},
+								{
+									selector: "tr",
+									format: "skip",
+								},
+								{
+									selector: "td",
+									format: "skip",
+								},
+								{
+									selector: "th",
+									format: "skip",
+								},
 							],
 						})
 							.replaceAll("<", "&lt;")
@@ -60,7 +77,9 @@ export async function GET({ request }) {
 	// map all post's dates to new Date(date)
 
 	postsRendered = postsRendered.map((p) => ({
-		...p,
+		code: p.code.startsWith("---------------") // i don't know why this bug happens but sometimes convert adds a ton of dashes to the beginning followed by \n\n
+			? p.code.split("\n").slice(1).join("\n").trim()
+			: p.code,
 		metadata: {
 			...p.metadata,
 			date: new Date(p.metadata.date),

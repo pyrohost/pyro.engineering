@@ -7,8 +7,6 @@
 	export let data: PageData;
 
 	$searchValue = data.query;
-
-	$: console.log(data.posts);
 </script>
 
 <h1 class="p-4 px-6 text-4xl font-bold">

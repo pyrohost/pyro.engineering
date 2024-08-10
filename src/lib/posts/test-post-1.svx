@@ -1,0 +1,11 @@
+---
+title: left post
+date: 2024-02-9
+authors: 
+    - "Elizabeth"
+    - "Evan"
+    - "nullptr"
+image: placeholder.png
+---
+
+this post should be halfwidth and aligned left.
