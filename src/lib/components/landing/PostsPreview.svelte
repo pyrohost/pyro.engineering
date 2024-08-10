@@ -25,7 +25,7 @@
 </script>
 
 <div class="h-fit w-full">
-	{#each Array.from({ length: Math.ceil(posts.length / 3) }) as _, i}
+	{#each Array.from({ length: Math.ceil(posts.length / 3) }) as _, i (i)}
 		{@const bigIndex = i * 3}
 		{@const leftSmallIndex = bigIndex + 1}
 		{@const rightSmallIndex = bigIndex + 2}
