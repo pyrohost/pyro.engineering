@@ -13,6 +13,14 @@
 	};
 </script>
 
+<svelte:head>
+	<title
+		>{data.post
+			? `${data.post.metadata.title} // Pyro Engineering`
+			: "Not found // Pyro Engineering"}</title
+	>
+</svelte:head>
+
 <div>
 	{#if data.post}
 		{@const formattedDate = convertDate(new Date(data.post.metadata.date))}

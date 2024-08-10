@@ -6,6 +6,10 @@
 	export let data: PageData;
 </script>
 
+<svelte:head>
+	<title>Pyro Engineering</title>
+</svelte:head>
+
 <div
 	style="background-image: url({ferosBg}); background-size: cover; background-position: center;"
 	class="flex h-fit w-full items-center border-b border-dashed border-neutral-800 px-8 py-7 text-white [&>*]:leading-normal"

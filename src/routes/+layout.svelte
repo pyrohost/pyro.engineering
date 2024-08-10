@@ -7,6 +7,10 @@
 	import "iconify-icon";
 </script>
 
+<svelte:head>
+	<title>Pyro Engineering</title>
+</svelte:head>
+
 <Navbar />
 
 <div class="flex w-screen justify-center pb-16">
