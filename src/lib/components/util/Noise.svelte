@@ -22,7 +22,7 @@
 			<feTurbulence
 				type="fractalNoise"
 				baseFrequency="0.102"
-				numOctaves="4"
+				numOctaves="5"
 				seed="15"
 				stitchTiles="stitch"
 				x="0%"
@@ -43,7 +43,7 @@
 				in="turbulence"
 				result="specularLighting"
 			>
-				<feDistantLight azimuth="3" elevation="90"></feDistantLight>
+				<feDistantLight azimuth="2" elevation="90"></feDistantLight>
 			</feSpecularLighting>
 		</filter></defs
 	><rect width="100%" height="100%" fill="transparent"></rect><rect

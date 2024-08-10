@@ -7,6 +7,7 @@
 	import { page } from "$app/stores";
 	import { searchValue } from "$lib/store";
 	import { transition } from "$lib/constants";
+	import { browser } from "$app/environment";
 
 	let searchOpen = $page.url.pathname.startsWith("/search/");
 	let jsRun = false;
@@ -14,7 +15,16 @@
 
 	const duration = "400ms";
 
-	$: if (!searchOpen) $searchValue = "";
+	let onSearchToggle = () => {};
+
+	$: if (!searchOpen) setTimeout(() => ($searchValue = ""), 100);
+
+	$: {
+		searchOpen;
+		if (browser) {
+			onSearchToggle();
+		}
+	}
 
 	const openSearch = () => {
 		searchOpen = true;
@@ -46,6 +56,9 @@
 
 	onMount(() => {
 		jsRun = true;
+		onSearchToggle = () => {
+			console.log(searchOpen);
+		};
 	});
 
 	onNavigate((e) => {
@@ -57,25 +70,28 @@
 </script>
 
 <div
-	class="fixed z-50 flex h-24 w-screen items-center justify-center border-b border-dashed border-neutral-700 bg-black/65 px-8 shadow-xl shadow-black/75 backdrop-blur-md"
+	class="fixed z-50 flex h-24 w-screen items-center justify-center bg-black/75 px-8 backdrop-blur-lg"
 >
-	<div class="flex h-full w-full max-w-[1400px] items-center justify-center">
+	<div class="flex h-full w-full max-w-[1400px] items-center justify-center px-4">
 		<div class="flex flex-grow items-center">
 			<a class="flex cursor-pointer" href="/">
-				<div class="mr-3.5 h-full opacity-60">
+				<div class="mr-3.5 h-full">
 					<LogoWordmark />
 				</div>
 				<div class="hidden items-center sm:flex">
-					<div class="h-8 w-0.5 bg-white/30" />
-					<div class="ml-4 select-none text-xl text-white/50">Engineering</div>
+					<div class="h-6 w-0.5 bg-white/75" />
+					<div class="-mt-0.5 ml-4 select-none text-2xl text-white">Engineering</div>
 				</div>
 			</a>
 		</div>
 		<div class="flex flex-shrink-0 items-center gap-6">
+			<a class="btn !h-12 !w-12 !min-w-0 !px-0" href="##">
+				<iconify-icon icon="heroicons-solid:rss" class="text-xl" />
+			</a>
 			<button
 				class={clsx("relative h-12", {
 					"w-72 cursor-default hover:!bg-[#191919] active:!bg-[#191919]": searchOpen,
-					"w-12": !searchOpen,
+					"w-32": !searchOpen,
 				})}
 				style="transition: width {duration} {transition};"
 				bind:this={searchBtn}
@@ -88,7 +104,8 @@
 					})}
 					style="transition: opacity {duration} {transition};"
 				>
-					Search
+					<iconify-icon icon="heroicons-solid:search" class="mr-2 text-xl" />
+					<span>Search</span>
 				</div>
 				<!-- this is a really bad way of ensuring there's no layout shift -->
 				{#if jsRun}
@@ -121,10 +138,11 @@
 					</div>
 				{/if}
 			</button>
-			<a class="btn h-12" href="##">All posts</a>
 		</div>
-		<div class="pointer-events-none absolute left-0 top-0 h-full w-full">
-			<Noise colour="#1a1a1a" />
+		<div
+			class="pointer-events-none absolute left-1/2 top-0 -z-10 mt-[1px] h-full w-full max-w-[1400px] -translate-x-1/2 border-b border-dashed border-neutral-800"
+		>
+			<Noise colour="#666" />
 		</div>
 	</div>
 </div>
