@@ -56,9 +56,6 @@
 
 	onMount(() => {
 		jsRun = true;
-		onSearchToggle = () => {
-			console.log(searchOpen);
-		};
 	});
 
 	onNavigate((e) => {

@@ -1,7 +1,9 @@
 <script lang="ts">
 	import ferosBg from "$lib/assets/feros-bg.png";
 	import PostsPreview from "$lib/components/landing/PostsPreview.svelte";
-	import ellie from "$lib/assets/ellie.png";
+	import type { PageData } from "./$types";
+
+	export let data: PageData;
 </script>
 
 <div
@@ -17,60 +19,4 @@
 	</h1>
 </div>
 
-<PostsPreview
-	posts={[
-		{
-			title: "How Pyro uses NixOS to power global gaming infrastructure",
-			date: new Date(),
-			posters: [
-				{
-					name: "Elizabeth",
-					image: ellie,
-				},
-				{
-					name: "Elizabeth",
-					image: ellie,
-				},
-				{
-					name: "Elizabeth",
-					image: ellie,
-				},
-				{
-					name: "Elizabeth",
-					image: ellie,
-				},
-			],
-			uuid: crypto.randomUUID(),
-		},
-		{
-			title: "How Pyro uses NixOS to power global gaming infrastructure",
-			date: new Date(),
-			posters: [
-				{
-					name: "Elizabeth",
-					image: ellie,
-				},
-			],
-			uuid: crypto.randomUUID(),
-		},
-		{
-			title: "How Pyro uses NixOS to power global gaming infrastructure",
-			date: new Date(),
-			posters: [
-				{
-					name: "Elizabeth",
-					image: ellie,
-				},
-				{
-					name: "Elizabeth",
-					image: ellie,
-				},
-				{
-					name: "Elizabeth",
-					image: ellie,
-				},
-			],
-			uuid: crypto.randomUUID(),
-		},
-	]}
-/>
+<PostsPreview posts={data.posts.map((p) => p.metadata)} />

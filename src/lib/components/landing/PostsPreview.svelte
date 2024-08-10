@@ -1,16 +1,15 @@
 <script lang="ts">
-	import placeholder from "$lib/assets/placeholder.png";
-	import ellie from "$lib/assets/ellie.png";
+	import { titleToSlug } from "$lib/util";
 	import clsx from "clsx";
 
 	export let posts: {
 		title: string;
 		date: Date;
-		posters: {
+		authors: {
 			name: string;
 			image: string;
 		}[];
-		uuid: string;
+		image: string;
 	}[];
 
 	const formatDate = (date: Date) => {
@@ -36,30 +35,31 @@
 				<div
 					class="flex h-fit w-full flex-col gap-6 border-b border-dashed border-neutral-800 p-8"
 				>
-					<img src={placeholder} alt="Post" class="h-[300px] w-full object-cover" />
+					<img src={post.image} alt="Post" class="h-[300px] w-full object-cover" />
 					<a
-						href="/posts/{post.uuid}"
+						href="/posts/{titleToSlug(post.title)}"
 						class="w-1/2 text-4xl font-bold leading-tight hover:underline"
 						>{post.title}</a
 					>
 					<div class="flex items-center gap-6">
 						<div class="flex items-center gap-2">
-							{#if post.posters.length === 1}
+							{#if post.authors.length === 1}
 								<img
-									src={post.posters[0].image}
-									alt="Poster"
+									src={post.authors[0].image}
+									alt={post.authors[0].name}
 									class="h-6 w-6 rounded-full object-cover"
 								/>
 								<div
 									class="overflow-hidden text-ellipsis whitespace-nowrap text-neutral-500"
 								>
-									{post.posters[0].name}
+									{post.authors[0].name}
 								</div>
 							{:else}
-								{#each post.posters as poster, i}
+								{#each post.authors as author, i}
 									<img
-										src={poster.image}
-										alt="Poster"
+										src={author.image}
+										alt={author.name}
+										title={author.name}
 										class="h-8 w-8 rounded-full border-4 border-black object-cover"
 										style="margin-left: {i > 0 ? -22 : 0}px"
 									/>
@@ -94,30 +94,31 @@
 								"flex flex-1 gap-8 p-14",
 							)}
 						>
-							<img src={placeholder} alt="Post" class="w-1/2 object-cover" />
+							<img src={leftPost.image} alt="Post" class="w-1/2 object-cover" />
 							<div class="flex h-full w-1/2 flex-col justify-center gap-6">
 								<a
-									href="/posts/{leftPost.uuid}"
+									href="/posts/{titleToSlug(leftPost.title)}"
 									class="text-2xl font-bold hover:underline">{leftPost.title}</a
 								>
 								<div class="flex items-center gap-6">
 									<div class="flex items-center gap-2">
-										{#if leftPost.posters.length === 1}
+										{#if leftPost.authors.length === 1}
 											<img
-												src={leftPost.posters[0].image}
-												alt="Poster"
+												src={leftPost.authors[0].image}
+												alt={leftPost.authors[0].name}
 												class="h-6 w-6 rounded-full object-cover"
 											/>
 											<div
 												class="overflow-hidden text-ellipsis whitespace-nowrap text-neutral-500"
 											>
-												{leftPost.posters[0].name}
+												{leftPost.authors[0].name}
 											</div>
 										{:else}
-											{#each leftPost.posters as poster, i}
+											{#each leftPost.authors as author, i}
 												<img
-													src={poster.image}
-													alt="Poster"
+													src={author.image}
+													alt={author.name}
+													title={author.name}
 													class="h-8 w-8 rounded-full border-4 border-black object-cover"
 													style="margin-left: {i > 0 ? -22 : 0}px"
 												/>
@@ -135,30 +136,31 @@
 					{#if rightPost}
 						{@const formattedDate = formatDate(rightPost.date)}
 						<div class="flex w-1/2 flex-1 gap-8 p-14">
-							<img src={placeholder} alt="Post" class="w-1/2 object-cover" />
+							<img src={rightPost.image} alt="Post" class="w-1/2 object-cover" />
 							<div class="flex h-full w-1/2 flex-col justify-center gap-6">
 								<a
-									href="/posts/{rightPost.uuid}"
+									href="/posts/{titleToSlug(rightPost.title)}"
 									class="text-2xl font-bold hover:underline">{rightPost.title}</a
 								>
 								<div class="flex items-center gap-6">
 									<div class="flex items-center gap-2">
-										{#if rightPost.posters.length === 1}
+										{#if rightPost.authors.length === 1}
 											<img
-												src={rightPost.posters[0].image}
-												alt="Poster"
+												src={rightPost.authors[0].image}
+												alt={rightPost.authors[0].name}
 												class="h-6 w-6 rounded-full object-cover"
 											/>
 											<div
 												class="overflow-hidden text-ellipsis whitespace-nowrap text-neutral-500"
 											>
-												{rightPost.posters[0].name}
+												{rightPost.authors[0].name}
 											</div>
 										{:else}
-											{#each rightPost.posters as poster, i}
+											{#each rightPost.authors as author, i}
 												<img
-													src={poster.image}
-													alt="Poster"
+													src={author.image}
+													alt={author.name}
+													title={author.name}
 													class="h-8 w-8 rounded-full border-4 border-black object-cover"
 													style="margin-left: {i > 0 ? -22 : 0}px"
 												/>
