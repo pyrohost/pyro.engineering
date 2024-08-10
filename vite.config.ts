@@ -1,13 +1,28 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
-import _ from "vite-plugin-webp-generator";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
-const ViteWebp = (_ as any).default as typeof _;
+const quality = 75;
 
 export default defineConfig({
 	plugins: [
-		ViteWebp({
-			extensions: ["png", "jpg", "jpeg"],
+		ViteImageOptimizer({
+			png: {
+				quality,
+			},
+			jpeg: {
+				quality,
+			},
+			jpg: {
+				quality,
+			},
+			tiff: {
+				quality,
+			},
+			webp: {
+				quality,
+				lossless: false,
+			},
 		}),
 		sveltekit(),
 	],
