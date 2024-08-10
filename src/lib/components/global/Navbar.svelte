@@ -42,18 +42,21 @@
 	};
 
 	const search = (e: KeyboardEvent) => {
-		setTimeout(() => {
-			const input = searchBtn.querySelector("input")!;
-			if (input.value.trim() === "") {
-				goto("/", {
-					keepFocus: true,
-				});
-			} else {
-				goto(`/search/${input.value}`, {
-					keepFocus: true,
-				});
-			}
-		});
+		setTimeout(
+			() => {
+				const input = searchBtn.querySelector("input")!;
+				if (input.value.trim() === "") {
+					goto("/", {
+						keepFocus: true,
+					});
+				} else {
+					goto(`/search/${input.value}`, {
+						keepFocus: true,
+					});
+				}
+			},
+			isFirefox ? 50 : undefined, // fixes a bug where the input is one key behind
+		);
 	};
 
 	onMount(() => {

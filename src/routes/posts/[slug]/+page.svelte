@@ -33,7 +33,7 @@
 				{#if data.post.metadata.authors.length === 1}
 					<img
 						src={data.post.metadata.authors[0].image}
-						alt="Poster"
+						alt={data.post.metadata.authors[0].name}
 						class="h-6 w-6 rounded-full object-cover"
 						width="24"
 						height="24"
@@ -47,7 +47,8 @@
 					{#each data.post.metadata.authors as author, i}
 						<img
 							src={author.image}
-							alt="Poster"
+							alt={author.name}
+							title={author.name}
 							class="h-8 w-8 rounded-full border-4 border-black object-cover"
 							style="margin-left: {i > 0 ? -22 : 0}px"
 							width="24"
