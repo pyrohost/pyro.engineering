@@ -82,7 +82,8 @@
 			#article h6,
 			#article ol,
 			#article ul,
-			#article table
+			#article table,
+			#article pre
 		) {
 		@apply w-full max-w-[800px] px-4 py-2 leading-loose;
 	}
