@@ -92,56 +92,61 @@
 			<a class="btn !h-12 !w-12 !min-w-0 !px-0" href="/rss.xml" target="_blank">
 				<RSSIcon width="20" />
 			</a>
-			<button
-				class={clsx("relative h-12", {
-					"w-72 cursor-default hover:!bg-[#191919] active:!bg-[#191919]": searchOpen,
-					"w-32": !searchOpen,
-				})}
-				style="transition: width {duration} {transition};"
-				bind:this={searchBtn}
-				on:click={openSearch}
-			>
-				<div
-					class={clsx("absolute top-0 flex h-full w-full items-center justify-center", {
-						"pointer-events-auto opacity-0": searchOpen,
-						"pointer-events-none opacity-100": !searchOpen,
+			<a href={jsRun ? undefined : "/search/"}>
+				<button
+					class={clsx("relative h-12", {
+						"w-72 cursor-default hover:!bg-[#191919] active:!bg-[#191919]": searchOpen,
+						"w-32": !searchOpen,
 					})}
-					style="transition: opacity {duration} {transition};"
+					style="transition: width {duration} {transition};"
+					bind:this={searchBtn}
+					on:click={openSearch}
 				>
-					<SearchIcon class="mr-2" width="20" />
-					<span>Search</span>
-				</div>
-				<!-- this is a really bad way of ensuring there's no layout shift -->
-				{#if jsRun}
 					<div
 						class={clsx(
-							"absolute top-0 flex h-full w-full items-center justify-center",
+							"absolute left-0 top-0 flex h-full w-full items-center justify-center",
 							{
-								"pointer-events-none opacity-0": !searchOpen,
-								"pointer-events-auto opacity-100": searchOpen,
+								"pointer-events-auto opacity-0": searchOpen,
+								"pointer-events-none opacity-100": !searchOpen,
 							},
 						)}
 						style="transition: opacity {duration} {transition};"
 					>
-						<button
-							tabindex={searchOpen ? 0 : -1}
-							class="absolute right-4 h-fit w-fit min-w-0 border-none !bg-transparent p-0"
-							on:click={closeSearch}
-						>
-							<SearchIcon width="20" class="text-white/50" />
-						</button>
-						<input
-							bind:value={$searchValue}
-							tabindex={searchOpen ? 0 : -1}
-							on:blur={closeSearch}
-							class="h-full w-full px-4 pr-10"
-							type="text"
-							placeholder="Search"
-							on:keydown={search}
-						/>
+						<SearchIcon class="mr-2" width="20" />
+						<span>Search</span>
 					</div>
-				{/if}
-			</button>
+					<!-- this is a really bad way of ensuring there's no layout shift -->
+					{#if jsRun}
+						<div
+							class={clsx(
+								"absolute top-0 flex h-full w-full items-center justify-center",
+								{
+									"pointer-events-none opacity-0": !searchOpen,
+									"pointer-events-auto opacity-100": searchOpen,
+								},
+							)}
+							style="transition: opacity {duration} {transition};"
+						>
+							<button
+								tabindex={searchOpen ? 0 : -1}
+								class="absolute right-4 h-fit w-fit min-w-0 border-none !bg-transparent p-0"
+								on:click={closeSearch}
+							>
+								<SearchIcon width="20" class="text-white/50" />
+							</button>
+							<input
+								bind:value={$searchValue}
+								tabindex={searchOpen ? 0 : -1}
+								on:blur={closeSearch}
+								class="h-full w-full px-4 pr-10"
+								type="text"
+								placeholder="Search"
+								on:keydown={search}
+							/>
+						</div>
+					{/if}
+				</button>
+			</a>
 		</div>
 		<div
 			class="pointer-events-none absolute left-1/2 top-0 -z-10 mt-[1px] h-full w-full max-w-[1400px] -translate-x-1/2 border-b border-dashed border-neutral-800"

@@ -6,11 +6,11 @@
 
 	export let data: PageData;
 
-	$searchValue = data.query;
+	$searchValue = data.query || "";
 </script>
 
 <h1 class="p-4 px-6 text-4xl font-bold">
-	{data.query}
+	{data.query || "All posts"} ({data.posts.length})
 </h1>
 
 {#each data.posts as post, i}
