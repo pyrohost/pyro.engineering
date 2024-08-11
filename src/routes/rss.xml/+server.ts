@@ -99,7 +99,7 @@ export async function GET({ request }) {
     <link>https://pyro.engineering</link>
     <description>Pyro develops gaming's most advanced software. We're makers at heart, and this is our story.</description>
     <language>en-us</language>
-    <lastBuildDate>${postsRendered[0].metadata.date.toUTCString()}</lastBuildDate>
+    <lastBuildDate>${postsRendered[0]?.metadata ? postsRendered[0].metadata.date.toUTCString() : new Date().toUTCString()}</lastBuildDate>
     <image>
         <url>https://pyro.engineering/favicon.ico</url>
         <title>pyro // engineering</title>
