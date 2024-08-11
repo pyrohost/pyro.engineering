@@ -2,11 +2,23 @@ import { read } from "$app/server";
 import { titleToSlug } from "$lib/util/index.js";
 import { compile } from "mdsvex";
 import { convert } from "html-to-text";
+import path from "path";
+import { readFile } from "fs/promises";
 
 export async function GET({ request }) {
 	const posts = import.meta.glob("/src/lib/posts/*.svx");
 	const postStrings = await Promise.all(
-		Object.keys(posts).map(async (p) => await read(p).text()),
+		Object.keys(posts).map(async (p) =>
+			(
+				await readFile(
+					path.join(
+						// get current directory
+						process.cwd(),
+						`./src/lib/posts/${path.basename(p, ".svx")}.svx`,
+					),
+				)
+			).toString(),
+		),
 	);
 	let postsRendered = await Promise.all(
 		postStrings.map(async (p) =>
