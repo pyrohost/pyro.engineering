@@ -27,20 +27,20 @@ export default defineConfig({
 				lossless: false,
 			},
 		}),
-		// viteImagemin({
-		// 	plugins: {
-		// 		png: imageminWebp({ quality }),
-		// 		jpeg: imageminWebp({ quality }),
-		// 		jpg: imageminWebp({ quality }),
-		// 	},
-		// 	makeWebp: {
-		// 		plugins: {
-		// 			png: imageminWebp({ quality }),
-		// 			jpeg: imageminWebp({ quality }),
-		// 			jpg: imageminWebp({ quality }),
-		// 		},
-		// 	},
-		// }),
+		viteImagemin({
+			plugins: {
+				png: imageminWebp({ quality }),
+				jpeg: imageminWebp({ quality }),
+				jpg: imageminWebp({ quality }),
+			},
+			makeWebp: {
+				plugins: {
+					png: imageminWebp({ quality }),
+					jpeg: imageminWebp({ quality }),
+					jpg: imageminWebp({ quality }),
+				},
+			},
+		}),
 		sveltekit(),
 		Icons({
 			compiler: "svelte",
