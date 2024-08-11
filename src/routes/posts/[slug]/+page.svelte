@@ -49,7 +49,7 @@
 							src={author.image}
 							alt={author.name}
 							title={author.name}
-							class="h-8 w-8 rounded-full border-4 border-black object-cover"
+							class="h-8 w-8 rounded-full border-4 border-black bg-black object-cover"
 							style="margin-left: {i > 0 ? -22 : 0}px"
 							width="24"
 							height="24"
