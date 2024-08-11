@@ -8,6 +8,8 @@
 	import { searchValue } from "$lib/store";
 	import { transition } from "$lib/constants";
 	import { browser } from "$app/environment";
+	import SearchIcon from "virtual:icons/heroicons-solid/search";
+	import RSSIcon from "virtual:icons/heroicons-solid/rss";
 
 	let searchOpen = $page.url.pathname.startsWith("/search/");
 	let jsRun = false;
@@ -88,7 +90,7 @@
 		</div>
 		<div class="flex flex-shrink-0 items-center gap-6">
 			<a class="btn !h-12 !w-12 !min-w-0 !px-0" href="/rss.xml" target="_blank">
-				<iconify-icon icon="heroicons-solid:rss" class="text-xl" />
+				<RSSIcon width="20" />
 			</a>
 			<button
 				class={clsx("relative h-12", {
@@ -106,7 +108,7 @@
 					})}
 					style="transition: opacity {duration} {transition};"
 				>
-					<iconify-icon icon="heroicons-solid:search" class="mr-2 text-xl" />
+					<SearchIcon class="mr-2" width="20" />
 					<span>Search</span>
 				</div>
 				<!-- this is a really bad way of ensuring there's no layout shift -->
@@ -126,7 +128,7 @@
 							class="absolute right-4 h-fit w-fit min-w-0 border-none !bg-transparent p-0"
 							on:click={closeSearch}
 						>
-							<iconify-icon icon="heroicons-solid:search" class="text-white/50" />
+							<SearchIcon width="20" class="text-white/50" />
 						</button>
 						<input
 							bind:value={$searchValue}

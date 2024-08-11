@@ -2,6 +2,7 @@
 	import { titleToSlug } from "$lib/util";
 	import clsx from "clsx";
 	import PostPreview from "./PostPreview.svelte";
+	import ExclamationIcon from "virtual:icons/heroicons-solid/exclamation-triangle";
 
 	export let posts: {
 		title: string;
@@ -47,10 +48,7 @@
 		{/each}
 	{:else}
 		<div class="flex h-[50vh] w-full flex-col items-center justify-center gap-3">
-			<iconify-icon
-				icon="heroicons-solid:exclamation-circle"
-				class="text-4xl text-neutral-500"
-			/>
+			<ExclamationIcon class="text-4xl text-neutral-500/80" />
 			<p class="ml-2 font-bold text-neutral-500">...nobody's posted yet. Check back later!</p>
 		</div>
 	{/if}

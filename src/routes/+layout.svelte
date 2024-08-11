@@ -4,7 +4,6 @@
 	import LogoWordmark from "$lib/components/logos/LogoWordmark.svelte";
 	import Noise from "$lib/components/util/Noise.svelte";
 	import Navbar from "$lib/components/global/Navbar.svelte";
-	import "iconify-icon";
 	import type { PageData } from "./$types";
 
 	export let data: PageData;
