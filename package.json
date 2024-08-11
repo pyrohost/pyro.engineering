@@ -42,7 +42,6 @@
 		"clsx": "^2.1.1",
 		"fuzzy-search": "^3.2.1",
 		"html-to-text": "^9.0.5",
-		"iconify-icon": "^2.1.0",
 		"mdsvex": "^0.11.2"
 	}
 }
