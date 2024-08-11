@@ -35,8 +35,13 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/ibm-plex-mono": "^5.0.13",
+		"@types/fuzzy-search": "^2.1.5",
+		"@types/html-to-text": "^9.0.4",
+		"@types/node": "^22.2.0",
 		"blurhash-svelte": "^1.0.0",
 		"clsx": "^2.1.1",
+		"fuzzy-search": "^3.2.1",
+		"html-to-text": "^9.0.5",
 		"iconify-icon": "^2.1.0",
 		"mdsvex": "^0.11.2"
 	}
