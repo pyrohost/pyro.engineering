@@ -27,3 +27,15 @@ lines.splice(line + 2, 0, code);
 const newFile = lines.join("\n");
 // write new file
 writeFileSync("./build/handler.js", newFile);
+
+const grayAnsi = "\x1b[90m";
+const greenAnsi = "\x1b[32m";
+const blueAnsi = "\x1b[34m";
+const resetAnsi = "\x1b[0m";
+console.log(
+	`${grayAnsi}[${blueAnsi}webp-hook.js${grayAnsi}] ${greenAnsi}successfully applied webp hook into generated node server.`,
+);
+//  run ${resetAnsi}bun preview${greenAnsi} to run server.${resetAnsi}
+console.log(
+	`${grayAnsi}[${blueAnsi}webp-hook.js${grayAnsi}] ${greenAnsi}run ${resetAnsi}bun preview${greenAnsi} to begin the server.${resetAnsi}`,
+);
