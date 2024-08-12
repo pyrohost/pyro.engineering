@@ -49,6 +49,9 @@ const findAssetByFilename = (
 
 const processAuthors = (authors: string[], authorImages: Record<string, string>): Author[] => {
 	return authors.map((authorName) => {
+		if ((authorName as any)["name"]) {
+			return authorName as unknown as Author;
+		}
 		const imagePath = Object.keys(authorImages).find(
 			(path) => path.split("/").pop()!.split(".").slice(0, -1).join(".") === authorName,
 		);
