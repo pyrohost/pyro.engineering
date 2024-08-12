@@ -13,7 +13,6 @@ authors:
     - nullptr
     - paytondev
     - Wander
-image: placeholder.png
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sollicitudin quis nibh sed bibendum. In hac habitasse platea dictumst. Cras vestibulum nec augue eu luctus. Pellentesque venenatis placerat nulla at facilisis. Proin a risus vel arcu aliquam pellentesque quis et dolor. Duis ac ex nunc. Donec ultrices libero nulla, et ornare nisi ultricies eu. Aenean tristique mi sollicitudin tortor finibus, eget facilisis urna lacinia. Ut aliquam, est non dignissim scelerisque, ligula enim blandit arcu, et rutrum erat nunc nec risus. Ut pulvinar turpis eget venenatis sagittis. Nunc ac varius est. Ut fermentum tempor augue, id pulvinar mi blandit in. Pellentesque porttitor lacinia iaculis. Donec aliquet libero eget nunc vestibulum, et sollicitudin nibh hendrerit. Duis iaculis elit ac egestas aliquam.

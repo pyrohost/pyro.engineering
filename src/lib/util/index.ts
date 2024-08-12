@@ -39,9 +39,11 @@ const importAssets = async (
 
 const findAssetByFilename = (
 	assets: Record<string, string>,
-	filename: string,
+	filename?: string,
 ): string | undefined => {
-	const entry = Object.entries(assets).find(([path]) => path.split("/").pop() === filename);
+	const entry = Object.entries(assets).find(
+		([path]) => path.split("/").pop()?.split(".").slice(0, -1).join(".") === filename,
+	);
 	return entry ? entry[1] : undefined;
 };
 
@@ -68,11 +70,18 @@ export const getAllPosts = async (): Promise<Post[]> => {
 		importAssets(authorAssets),
 	]);
 
+	const postKeys = Object.keys(postsImports);
+
 	return posts
 		.filter((p): p is Post => !!p.metadata)
-		.map((post) => {
+		.map((post, i) => {
 			const metadata = { ...post.metadata, date: new Date(post.metadata.date) };
-			metadata.image = findAssetByFilename(postImages, metadata.image) || metadata.image;
+			const key = postKeys[i];
+			metadata.image =
+				findAssetByFilename(
+					postImages,
+					key.split("/").at(-1)?.split(".").slice(0, -1).join("."),
+				) || metadata.image;
 			metadata.authors = processAuthors(
 				metadata.authors as unknown as string[],
 				authorImages,
