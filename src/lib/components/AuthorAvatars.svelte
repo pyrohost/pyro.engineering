@@ -12,7 +12,7 @@
 				style="z-index: {authors.length - i};"
 			/>
 			<div
-				class="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 translate-y-1 scale-95 transform opacity-0 transition-all duration-200 group-hover:-translate-y-2 group-hover:scale-100 group-hover:opacity-100"
+				class="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 translate-y-1 scale-95 transform opacity-0 transition-all duration-200 group-hover:-translate-y-2 group-hover:scale-100 group-hover:opacity-100"
 			>
 				<div class="whitespace-nowrap rounded bg-neutral-800 px-2 py-1 text-xs text-white">
 					{author.name}
