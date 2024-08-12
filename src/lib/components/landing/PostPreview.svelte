@@ -67,8 +67,10 @@
 			<div class="flex items-center gap-6">
 				<div class="flex items-center gap-2">
 					{#if post.authors.length === 1}
-						<!-- "/authors/{toSlug(post.authors[0].name)}" -->
-						<a href={"##"} class="flex items-center gap-3 [&:hover>div]:underline">
+						<a
+							href="/author/{toSlug(post.authors[0].name)}"
+							class="flex items-center gap-3 [&:hover>div]:underline"
+						>
 							<img
 								src={post.authors[0].image}
 								alt={post.authors[0].name}

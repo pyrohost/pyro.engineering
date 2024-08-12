@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { toSlug } from "$lib/util";
+
 	export let authors: { name: string; image: string }[];
 </script>
 
 <div class="flex items-center">
 	{#each authors as author, i}
-		<div class="group relative -ml-3 first:ml-0">
+		<a href="/author/{toSlug(author.name)}" class="group relative -ml-3 first:ml-0">
 			<img
 				src={author.image}
 				alt={`Avatar of ${author.name}`}
@@ -21,6 +23,6 @@
 					class="absolute left-1/2 top-full -mt-1 h-2 w-2 -translate-x-1/2 rotate-45 transform bg-neutral-800"
 				></div>
 			</div>
-		</div>
+		</a>
 	{/each}
 </div>
