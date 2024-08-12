@@ -29,10 +29,10 @@
 		</h1>
 		<div class="my-6 border-b border-neutral-700"></div>
 		<div class="mb-6 flex flex-wrap items-center gap-4">
-			<time class="font-medium text-neutral-400">{formattedDate}</time>
-			<div class="hidden h-4 w-px bg-neutral-700 sm:block"></div>
 			<div class="flex items-center gap-2">
 				{#if data.post.metadata.authors.length === 1}
+					<time class="mr-3 font-medium text-neutral-400">{formattedDate}</time>
+					<div class="mr-3 hidden h-4 w-px bg-neutral-700 sm:block"></div>
 					<img
 						src={data.post.metadata.authors[0].image}
 						alt={data.post.metadata.authors[0].name}
