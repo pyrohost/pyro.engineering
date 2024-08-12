@@ -121,7 +121,7 @@
 							bind:this={searchInput}
 							tabindex={searchOpen ? 0 : -1}
 							on:blur={closeSearch}
-							class="h-full w-full border-none px-4 pr-10 text-sm text-black outline-none selection:bg-black selection:text-white"
+							class="h-full w-full border-none bg-[#191919] px-4 pr-10 text-sm text-white outline-none selection:bg-black selection:text-white"
 							type="text"
 							placeholder="Search"
 							on:keydown={handleSearch}
