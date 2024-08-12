@@ -1,4 +1,5 @@
 import { readFile } from "fs/promises";
+import { toSlug } from "$lib/util";
 import { convert } from "html-to-text";
 import { compile } from "mdsvex";
 import path from "path";
@@ -63,7 +64,7 @@ export async function GET() {
 				(post) => `
 				<item>
 					<title>${post.metadata.title}</title>
-					<link>https://pyro.engineering/posts/${titleToSlug(post.metadata.title)}</link>
+					<link>https://pyro.engineering/posts/${toSlug(post.metadata.title)}</link>
 					<description>${convertToText(post.code).split("\n")[0].trim()}</description>
 					<pubDate>${post.metadata.date.toUTCString()}</pubDate>
 				</item>`,
