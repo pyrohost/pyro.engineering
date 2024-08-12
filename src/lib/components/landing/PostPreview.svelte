@@ -60,7 +60,7 @@
 			<a
 				href="/posts/{toSlug(post.title)}"
 				class={clsx("font-bold hover:underline", {
-					"w-1/2 text-4xl leading-tight": large,
+					"w-full xl:w-1/2 text-4xl leading-tight": large,
 					"text-2xl": !large,
 				})}>{post.title}</a
 			>
