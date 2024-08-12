@@ -1,157 +1,139 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { browser } from "$app/environment";
+	import { goto } from "$app/navigation";
+	import { page } from "$app/stores";
+	import { transition } from "$lib/constants";
+	import { searchValue } from "$lib/store";
+	import { onMount, tick } from "svelte";
+	import RSSIcon from "virtual:icons/heroicons-solid/rss";
+	import SearchIcon from "virtual:icons/heroicons-solid/search";
 	import LogoWordmark from "../logos/LogoWordmark.svelte";
 	import Noise from "../util/Noise.svelte";
-	import clsx from "clsx";
-	import { goto, onNavigate } from "$app/navigation";
-	import { page } from "$app/stores";
-	import { searchValue } from "$lib/store";
-	import { transition } from "$lib/constants";
-	import { browser } from "$app/environment";
-	import SearchIcon from "virtual:icons/heroicons-solid/search";
-	import RSSIcon from "virtual:icons/heroicons-solid/rss";
 
 	let searchOpen = $page.url.pathname.startsWith("/search/");
-	let jsRun = false;
 	let searchBtn: HTMLButtonElement;
+	let searchInput: HTMLInputElement;
 
-	const duration = "400ms";
+	const DURATION = 400;
+	const TRANSITION = transition;
 
-	let onSearchToggle = () => {};
-
-	export let isFirefox = false;
-
-	$: if (!searchOpen) setTimeout(() => ($searchValue = ""), 100);
-
-	$: {
-		searchOpen;
-		if (browser) {
-			onSearchToggle();
-		}
+	$: if (!searchOpen) {
+		clearSearch();
 	}
 
-	const openSearch = () => {
-		searchOpen = true;
+	function clearSearch() {
 		setTimeout(() => {
-			searchBtn.querySelector("input")?.focus();
-		}, 50);
-	};
+			$searchValue = "";
+		}, 100);
+	}
 
-	const closeSearch = () => {
-		const input = searchBtn.querySelector("input")!;
-		if (input.value) return;
+	function openSearch() {
+		searchOpen = true;
+		focusSearchInput();
+	}
+
+	async function focusSearchInput() {
+		await tick();
+		searchInput?.focus();
+	}
+
+	function closeSearch() {
+		if ($searchValue.trim()) return;
 		searchOpen = false;
-	};
+	}
 
-	const search = (e: KeyboardEvent) => {
-		setTimeout(
-			() => {
-				const input = searchBtn.querySelector("input")!;
-				if (input.value.trim() === "") {
-					goto("/", {
-						keepFocus: true,
-					});
-				} else {
-					goto(`/search/${input.value}`, {
-						keepFocus: true,
-					});
-				}
-			},
-			isFirefox ? 50 : undefined, // fixes a bug where the input is one key behind
-		);
-	};
+	async function handleSearch(e: KeyboardEvent) {
+		if (e.key !== "Enter") return;
+
+		await tick();
+		const searchQuery = $searchValue.trim();
+		const path = searchQuery ? `/search/${searchQuery}` : "/";
+
+		goto(path, { keepFocus: true });
+	}
 
 	onMount(() => {
-		jsRun = true;
+		if (searchOpen) {
+			focusSearchInput();
+		}
 	});
 
-	onNavigate((e) => {
-		// if the input is focused, don't close the search
-		const input = searchBtn.querySelector("input")!;
-		if (input === document.activeElement) return;
-		searchOpen = e.to?.url.pathname.startsWith("/search/") || false;
-	});
+	$: transitionStyle = `transition: all ${DURATION}ms ${TRANSITION};`;
 </script>
 
-<div
+<nav
 	class="fixed z-50 flex h-24 w-screen items-center justify-center bg-black/75 px-8 backdrop-blur-lg"
 >
 	<div class="flex h-full w-full max-w-[1400px] items-center justify-center px-4">
 		<div class="flex flex-grow items-center">
 			<a class="flex cursor-pointer" href="/">
-				<div class="mr-3.5 h-full">
+				<div class="mr-3.5 h-8">
 					<LogoWordmark />
 				</div>
 				<div class="hidden items-center sm:flex">
-					<div class="h-6 w-0.5 bg-white/75" />
-					<div class="-mt-0.5 ml-4 select-none text-2xl text-white">Engineering</div>
+					<div class="h-4 w-0.5 bg-white/75" />
+					<div class="-mt-0.5 ml-4 select-none text-lg text-white">Engineering</div>
 				</div>
 			</a>
 		</div>
 		<div class="flex flex-shrink-0 items-center gap-6">
-			<a class="btn !h-12 !w-12 !min-w-0 !px-0" href="/rss.xml" target="_blank">
+			<a
+				class="btn !h-10 !w-10 !min-w-0 !px-0"
+				href="/rss.xml"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				<RSSIcon width="20" />
 			</a>
-			<a href={jsRun ? undefined : "/search/"}>
-				<button
-					class={clsx("relative h-12", {
-						"w-72 cursor-default hover:!bg-[#191919] active:!bg-[#191919]": searchOpen,
-						"w-32": !searchOpen,
-					})}
-					style="transition: width {duration} {transition};"
-					bind:this={searchBtn}
-					on:click={openSearch}
+			<button
+				class="relative h-10 {searchOpen
+					? 'w-72 cursor-default hover:!bg-[#191919] active:!bg-[#191919]'
+					: 'w-28'}"
+				style={transitionStyle}
+				bind:this={searchBtn}
+				on:click={openSearch}
+			>
+				<div
+					class="absolute left-0 top-0 flex h-full w-full items-center justify-center {searchOpen
+						? 'pointer-events-auto opacity-0'
+						: 'pointer-events-none opacity-100'}"
+					style={transitionStyle}
 				>
+					<SearchIcon class="mr-2" width="20" />
+					<span class="text-sm">Search</span>
+				</div>
+				{#if browser}
 					<div
-						class={clsx(
-							"absolute left-0 top-0 flex h-full w-full items-center justify-center",
-							{
-								"pointer-events-auto opacity-0": searchOpen,
-								"pointer-events-none opacity-100": !searchOpen,
-							},
-						)}
-						style="transition: opacity {duration} {transition};"
+						class="absolute top-0 flex h-full w-full items-center justify-center {searchOpen
+							? 'pointer-events-auto opacity-100'
+							: 'pointer-events-none opacity-0'}"
+						style={transitionStyle}
 					>
-						<SearchIcon class="mr-2" width="20" />
-						<span>Search</span>
-					</div>
-					<!-- this is a really bad way of ensuring there's no layout shift -->
-					{#if jsRun}
-						<div
-							class={clsx(
-								"absolute top-0 flex h-full w-full items-center justify-center",
-								{
-									"pointer-events-none opacity-0": !searchOpen,
-									"pointer-events-auto opacity-100": searchOpen,
-								},
-							)}
-							style="transition: opacity {duration} {transition};"
+						<button
+							tabindex={searchOpen ? 0 : -1}
+							class="absolute right-4 h-fit w-fit min-w-0 border-none !bg-transparent p-0 text-black"
+							on:click={closeSearch}
 						>
-							<button
-								tabindex={searchOpen ? 0 : -1}
-								class="absolute right-4 h-fit w-fit min-w-0 border-none !bg-transparent p-0"
-								on:click={closeSearch}
-							>
-								<SearchIcon width="20" class="text-white/50" />
-							</button>
-							<input
-								bind:value={$searchValue}
-								tabindex={searchOpen ? 0 : -1}
-								on:blur={closeSearch}
-								class="h-full w-full px-4 pr-10"
-								type="text"
-								placeholder="Search"
-								on:keydown={search}
-							/>
-						</div>
-					{/if}
-				</button>
-			</a>
+							<SearchIcon width="20" class="text-white/50" />
+						</button>
+						<input
+							bind:value={$searchValue}
+							bind:this={searchInput}
+							tabindex={searchOpen ? 0 : -1}
+							on:blur={closeSearch}
+							class="h-full w-full border-none px-4 pr-10 text-sm text-black outline-none selection:bg-black selection:text-white"
+							type="text"
+							placeholder="Search"
+							on:keydown={handleSearch}
+						/>
+					</div>
+				{/if}
+			</button>
 		</div>
 		<div
 			class="pointer-events-none absolute left-1/2 top-0 -z-10 mt-[1px] h-full w-full max-w-[1400px] -translate-x-1/2 border-b border-dashed border-neutral-800"
 		>
-			<Noise colour={isFirefox ? "#222" : "#666"} />
+			<Noise colour="#666" />
 		</div>
 	</div>
-</div>
+</nav>

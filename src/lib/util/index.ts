@@ -1,96 +1,82 @@
-import type { SvelteComponent } from "svelte";
+import { SvelteComponent } from "svelte";
 
-export const toSlug = (title: string) => {
+interface PostMetadata {
+	title: string;
+	date: Date;
+	authors: Author[];
+	image: string;
+}
+
+interface Author {
+	name: string;
+	image: string;
+}
+
+interface Post {
+	default: SvelteComponent;
+	metadata: PostMetadata;
+}
+
+export const toSlug = (title: string): string => {
 	return title
 		.toLowerCase()
 		.replace(/ /g, "-")
 		.replace(/[^a-z0-9-]/g, "");
 };
 
-// this fn contains some really hacky code to mangle the
-// images to be processed by vite. sorry evan :3
-export const getAllPosts = async () => {
-	const postsImports = import.meta.glob<{
-		default: SvelteComponent;
-		metadata: Record<string, any>;
-	}>("/src/lib/posts/*.svx");
-	const posts = (await Promise.all(Object.values(postsImports).map((v) => v()))).filter(
-		(p) => !!p.metadata,
-	) as {
-		default: SvelteComponent;
-		metadata: {
-			title: string;
-			date: Date;
-			authors: {
-				name: string;
-				image: string;
-			}[];
-			image: string;
-		};
-	}[];
-
-	posts.forEach((post) => {
-		post.metadata.date = new Date(post.metadata.date);
-	});
-
-	// meta glob all posts in /src/lib/assets/posts/*
-	const postsAssets = import.meta.glob("/src/lib/assets/posts/*");
-
-	const postImages: Record<string, string> = {};
-
+const importAssets = async (
+	glob: Record<string, () => Promise<unknown>>,
+): Promise<Record<string, string>> => {
+	const assets: Record<string, string> = {};
 	await Promise.all(
-		Object.entries(postsAssets).map(async ([path, asset]) => {
-			const image = await asset();
-			postImages[path] = (image as any).default;
+		Object.entries(glob).map(async ([path, importFn]) => {
+			const module = await importFn();
+			assets[path] = (module as { default: string }).default;
 		}),
 	);
+	return assets;
+};
 
+const findAssetByFilename = (
+	assets: Record<string, string>,
+	filename: string,
+): string | undefined => {
+	const entry = Object.entries(assets).find(([path]) => path.split("/").pop() === filename);
+	return entry ? entry[1] : undefined;
+};
+
+const processAuthors = (authors: string[], authorImages: Record<string, string>): Author[] => {
+	return authors.map((authorName) => {
+		const imagePath = Object.keys(authorImages).find(
+			(path) => path.split("/").pop()!.split(".").slice(0, -1).join(".") === authorName,
+		);
+		return {
+			name: authorName,
+			image: imagePath ? authorImages[imagePath] : "",
+		};
+	});
+};
+
+export const getAllPosts = async (): Promise<Post[]> => {
+	const postsImports = import.meta.glob<Post>("/src/lib/posts/*.svx");
+	const postsAssets = import.meta.glob("/src/lib/assets/posts/*");
 	const authorAssets = import.meta.glob("/src/lib/assets/authors/*");
 
-	const authorImages: Record<string, string> = {};
+	const [posts, postImages, authorImages] = await Promise.all([
+		Promise.all(Object.values(postsImports).map((v) => v())),
+		importAssets(postsAssets),
+		importAssets(authorAssets),
+	]);
 
-	await Promise.all(
-		Object.entries(authorAssets).map(async ([path, asset]) => {
-			const image = await asset();
-			authorImages[path] = (image as any).default;
-		}),
-	);
-	const keys = Object.keys(postsImports);
-	posts.forEach((post, i) => {
-		const fileName = keys[i];
-		const fn = fileName.split("/").pop()!.split(".").slice(0, -1).join(".");
-		const image = Object.entries(postImages).find(([path]) => {
-			const p = path.split("/").pop()!.split(".").slice(0, -1).join(".");
-			return p === fn;
-		});
-		if (image) {
-			post.metadata.image = image[1];
-		}
-
-		let authors: { name: string; image: string }[] = [];
-
-		post.metadata.authors.forEach((author, i) => {
-			const authorImage = Object.entries(authorImages).find(
-				([path]) =>
-					path.split("/").pop()!.split(".").slice(0, -1).join(".") ===
-					(author as unknown as string),
+	return posts
+		.filter((p): p is Post => !!p.metadata)
+		.map((post) => {
+			const metadata = { ...post.metadata, date: new Date(post.metadata.date) };
+			metadata.image = findAssetByFilename(postImages, metadata.image) || metadata.image;
+			metadata.authors = processAuthors(
+				metadata.authors as unknown as string[],
+				authorImages,
 			);
-
-			if (authorImage) {
-				authors.push({
-					name: author as unknown as string,
-					image: authorImage[1],
-				});
-			}
+			return { ...post, metadata };
 		});
-		// this check fixes a nasty bug where the
-		// above code somehow (??) mutates the
-		// original, thus causing the authors to
-		// be empty
-		if (authors.length > 0) post.metadata.authors = authors;
-	});
-
-	// sort the posts by date (latest first)
-	posts.sort((a, b) => b.metadata.date.getTime() - a.metadata.date.getTime());
-	return posts;
 };
