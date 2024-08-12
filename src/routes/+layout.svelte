@@ -2,9 +2,12 @@
 	import Navbar from "$lib/components/global/Navbar.svelte";
 	import "@fontsource/ibm-plex-mono";
 	import "../app.css";
+	import type { PageData } from "./$types";
+
+	export let data: PageData;
 </script>
 
-<Navbar />
+<Navbar isFirefox={data.ua?.toLowerCase().includes("firefox")} />
 
 <div class="flex w-screen justify-center pb-16">
 	<div
