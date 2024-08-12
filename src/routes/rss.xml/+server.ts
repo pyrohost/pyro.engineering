@@ -1,5 +1,5 @@
 import { read } from "$app/server";
-import { titleToSlug } from "$lib/util/index.js";
+import { toSlug } from "$lib/util/index.js";
 import { compile } from "mdsvex";
 import { convert } from "html-to-text";
 import path from "path";
@@ -120,7 +120,7 @@ export async function GET({ request }) {
     ${postsRendered.map(
 		(p) => `<item>
         <title>${p.metadata.title}</title>
-        <link>https://pyro.engineering/posts/${titleToSlug(p.metadata.title)}</link>
+        <link>https://pyro.engineering/posts/${toSlug(p.metadata.title)}</link>
         <description>${p.code.trim().split("\n")[0]}</description>
         <pubDate>${p.metadata.date.toUTCString()}</pubDate>
 	</item>`,

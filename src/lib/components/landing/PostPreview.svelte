@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { titleToSlug as toSlug } from "$lib/util";
+	import { toSlug } from "$lib/util";
 	import clsx from "clsx";
 
 	export let post: {

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { titleToSlug } from "$lib/util";
 	import clsx from "clsx";
 	import PostPreview from "./PostPreview.svelte";
 	import ExclamationIcon from "virtual:icons/heroicons-solid/exclamation-triangle";

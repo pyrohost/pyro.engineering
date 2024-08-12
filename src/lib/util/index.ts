@@ -1,6 +1,6 @@
 import type { SvelteComponent } from "svelte";
 
-export const titleToSlug = (title: string) => {
+export const toSlug = (title: string) => {
 	return title
 		.toLowerCase()
 		.replace(/ /g, "-")
