@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { titleToSlug } from "$lib/util";
+	import { titleToSlug as toSlug } from "$lib/util";
 	import clsx from "clsx";
 
 	export let post: {
@@ -57,7 +57,7 @@
 			})}
 		>
 			<a
-				href="/posts/{titleToSlug(post.title)}"
+				href="/posts/{toSlug(post.title)}"
 				class={clsx("font-bold hover:underline", {
 					"w-1/2 text-4xl leading-tight": large,
 					"text-2xl": !large,
@@ -66,16 +66,19 @@
 			<div class="flex items-center gap-6">
 				<div class="flex items-center gap-2">
 					{#if post.authors.length === 1}
-						<img
-							src={post.authors[0].image}
-							alt={post.authors[0].name}
-							class="h-6 w-6 rounded-full object-cover"
-						/>
-						<div
-							class="overflow-hidden text-ellipsis whitespace-nowrap text-neutral-500"
-						>
-							{post.authors[0].name}
-						</div>
+						<!-- "/authors/{toSlug(post.authors[0].name)}" -->
+						<a href={"##"} class="flex items-center gap-3 [&:hover>div]:underline">
+							<img
+								src={post.authors[0].image}
+								alt={post.authors[0].name}
+								class="h-6 w-6 rounded-full object-cover"
+							/>
+							<div
+								class="overflow-hidden text-ellipsis whitespace-nowrap text-neutral-500"
+							>
+								{post.authors[0].name}
+							</div>
+						</a>
 					{:else}
 						{#each post.authors as author, i}
 							<img

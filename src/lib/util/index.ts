@@ -55,12 +55,14 @@ export const getAllPosts = async () => {
 			authorImages[path] = (image as any).default;
 		}),
 	);
-
-	// for each post, find the first one in the postImages object where the key.split('/').pop() is equal to the post.metadata.image
-	posts.forEach((post) => {
-		const image = Object.entries(postImages).find(
-			([path]) => path.split("/").pop() === post.metadata.image,
-		);
+	const keys = Object.keys(postsImports);
+	posts.forEach((post, i) => {
+		const fileName = keys[i];
+		const fn = fileName.split("/").pop()!.split(".").slice(0, -1).join(".");
+		const image = Object.entries(postImages).find(([path]) => {
+			const p = path.split("/").pop()!.split(".").slice(0, -1).join(".");
+			return p === fn;
+		});
 		if (image) {
 			post.metadata.image = image[1];
 		}
@@ -88,5 +90,7 @@ export const getAllPosts = async () => {
 		if (authors.length > 0) post.metadata.authors = authors;
 	});
 
+	// sort the posts by date (latest first)
+	posts.sort((a, b) => b.metadata.date.getTime() - a.metadata.date.getTime());
 	return posts;
 };

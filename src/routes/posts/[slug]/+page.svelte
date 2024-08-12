@@ -107,8 +107,12 @@
 		@apply my-2 w-full max-w-[768px] border-t border-dashed border-neutral-800 bg-neutral-950;
 	}
 
-	:global(#article h1, #article h2, #article h3, #article h4, #article h5, #article h6) {
+	:global(#article h1) {
 		@apply my-2 text-2xl font-bold text-neutral-400;
+	}
+
+	:global(#article h2, #article h3, #article h4, #article h5, #article h6) {
+		@apply my-2 font-bold text-neutral-400;
 	}
 
 	:global(#article ol) {
