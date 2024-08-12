@@ -87,5 +87,6 @@ export const getAllPosts = async (): Promise<Post[]> => {
 				authorImages,
 			);
 			return { ...post, metadata };
-		});
+		})
+		.sort((a, b) => b.metadata.date.getTime() - a.metadata.date.getTime());
 };
