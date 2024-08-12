@@ -1,5 +1,6 @@
 <script lang="ts">
 	import AuthorAvatars from "$lib/components/AuthorAvatars.svelte";
+	import { toSlug } from "$lib/util";
 	import type { PageData } from "./$types";
 
 	export let data: PageData;
@@ -33,16 +34,21 @@
 				{#if data.post.metadata.authors.length === 1}
 					<time class="mr-3 font-medium text-neutral-400">{formattedDate}</time>
 					<div class="mr-3 hidden h-4 w-px bg-neutral-700 sm:block"></div>
-					<img
-						src={data.post.metadata.authors[0].image}
-						alt={data.post.metadata.authors[0].name}
-						class="h-8 w-8 rounded-full object-cover"
-						width="32"
-						height="32"
-					/>
-					<div class="max-w-[200px] truncate text-neutral-400">
-						{data.post.metadata.authors[0].name}
-					</div>
+					<a
+						class="flex items-center gap-2.5 hover:underline"
+						href="/author/{toSlug(data.post.metadata.authors[0].name)}"
+					>
+						<img
+							src={data.post.metadata.authors[0].image}
+							alt={data.post.metadata.authors[0].name}
+							class="h-8 w-8 rounded-full object-cover"
+							width="32"
+							height="32"
+						/>
+						<div class="max-w-[200px] truncate text-neutral-400">
+							{data.post.metadata.authors[0].name}
+						</div>
+					</a>
 				{:else}
 					<div class="flex flex-wrap items-center gap-4">
 						<time class="font-medium text-neutral-400">{formattedDate}</time>
