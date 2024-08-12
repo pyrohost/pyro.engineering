@@ -1,7 +1,0 @@
----
-title: Docker in Docker
-date: 2024-09-01
-authors:
-    - Elizabeth
-    - François
----
