@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { titleToSlug as toSlug } from "$lib/util";
 	import clsx from "clsx";
+	import AuthorAvatars from "../AuthorAvatars.svelte";
 
 	export let post: {
 		title: string;
@@ -41,7 +42,7 @@
 		src={post.image}
 		alt="Post"
 		class={clsx("object-cover", {
-			"h-[300px] w-full": large,
+			"h-[500px] w-full": large,
 			"max-h-48 w-1/2": !large,
 		})}
 	/>
@@ -80,15 +81,7 @@
 							</div>
 						</a>
 					{:else}
-						{#each post.authors as author, i}
-							<img
-								src={author.image}
-								alt={author.name}
-								title={author.name}
-								class="h-8 w-8 rounded-full border-4 border-black bg-black object-cover"
-								style="margin-left: {i > 0 ? -22 : 0}px"
-							/>
-						{/each}
+						<AuthorAvatars authors={post.authors} />
 					{/if}
 				</div>
 				<div class="h-5 w-[1px] bg-neutral-500" />
