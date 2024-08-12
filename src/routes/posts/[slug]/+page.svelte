@@ -25,7 +25,7 @@
 <div class="mx-auto max-w-4xl px-4 py-8">
 	{#if data.post}
 		{@const formattedDate = convertDate(new Date(data.post.metadata.date))}
-		<h1 class="mb-6 text-4xl font-bold leading-tight md:text-5xl">
+		<h1 class="mb-6 text-4xl font-bold md:leading-[120%] md:text-5xl">
 			{data.post.metadata.title}
 		</h1>
 		<div class="my-6 border-b border-neutral-700"></div>
