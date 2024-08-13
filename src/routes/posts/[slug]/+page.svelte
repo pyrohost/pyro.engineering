@@ -2,6 +2,7 @@
 	import AuthorAvatars from "$lib/components/AuthorAvatars.svelte";
 	import { toSlug } from "$lib/util";
 	import type { PageData } from "./$types";
+	import opengraphBg from "$lib/assets/opengraph_image__2_.png";
 
 	export let data: PageData;
 
@@ -20,12 +21,39 @@
 			? `${data.post.metadata.title} // Pyro Engineering`
 			: "Not found // Pyro Engineering"}</title
 	>
+	{#if data.post}
+		{@const description = (
+			data.htmlTextPosts.find(
+				(p) =>
+					p.metadata.title === (data.post || { metadata: { title: "" } }).metadata.title,
+			) || { code: "" }
+		).code
+			.split("\n")[0]
+			.trim()}
+		{@const shortenedDesc =
+			description.length > 160 ? `${description.slice(0, 160)}...` : description}
+		<meta name="description" content={shortenedDesc} />
+		<meta property="og:title" content="{data.post.metadata.title} // Pyro Engineering" />
+		<meta property="og:description" content={shortenedDesc} />
+		<meta property="og:image" content={opengraphBg} />
+		<meta
+			property="og:url"
+			content="https://pyro.engineering/posts/{toSlug(data.post.metadata.title)}"
+		/>
+		<meta property="og:type" content="website" />
+		<meta name="theme-color" content="#ff4438" />
+	{:else}
+		<meta property="og:image" content={opengraphBg} />
+		<meta property="og:url" content="https://pyro.engineering" />
+		<meta property="og:type" content="website" />
+		<meta name="theme-color" content="#ff4438" />
+	{/if}
 </svelte:head>
 
 <div class="mx-auto max-w-4xl px-4 py-8">
 	{#if data.post}
 		{@const formattedDate = convertDate(new Date(data.post.metadata.date))}
-		<h1 class="mb-6 text-4xl font-bold md:leading-[120%] md:text-5xl">
+		<h1 class="mb-6 text-4xl font-bold md:text-5xl md:leading-[120%]">
 			{data.post.metadata.title}
 		</h1>
 		<div class="my-6 border-b border-neutral-700"></div>

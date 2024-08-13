@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ferosBg from "$lib/assets/feros-bg.png";
+	import opengraphBg from "$lib/assets/opengraph_image__2_.png";
 	import PostsPreview from "$lib/components/landing/PostPreviews.svelte";
 	import type { PageData } from "./$types";
 
@@ -17,14 +17,14 @@
 		property="og:description"
 		content="Pyro develops gaming’s most advanced software. We're makers at heart, and this is our story."
 	/>
-	<meta property="og:image" content="https://pyro.engineering{ferosBg}" />
+	<meta property="og:image" content={opengraphBg} />
 	<meta property="og:url" content="https://pyro.engineering" />
 	<meta property="og:type" content="website" />
 	<meta name="theme-color" content="#ff4438" />
 </svelte:head>
 
 <div
-	style="background-image: url({ferosBg}); background-size: cover; background-position: center;"
+	style="background-image: url({opengraphBg}); background-size: cover; background-position: center;"
 	class="hidden h-fit w-full flex-col items-center border-b border-dashed border-neutral-800 px-8 py-7 text-white xl:flex xl:flex-row [&>*]:leading-normal"
 >
 	<h1

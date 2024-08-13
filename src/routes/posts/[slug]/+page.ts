@@ -1,3 +1,4 @@
+import { browser } from "$app/environment";
 import { getAllPosts, toSlug } from "$lib/util/index.js";
 import type { SvelteComponent } from "svelte";
 

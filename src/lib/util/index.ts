@@ -1,6 +1,7 @@
 import { SvelteComponent } from "svelte";
+import { convert } from "html-to-text";
 
-interface PostMetadata {
+export interface PostMetadata {
 	title: string;
 	date: Date;
 	authors: Author[];
@@ -94,3 +95,16 @@ export const getAllPosts = async (): Promise<Post[]> => {
 		})
 		.sort((a, b) => b.metadata.date.getTime() - a.metadata.date.getTime());
 };
+
+export const convertToText = (html: string) =>
+	convert(html, {
+		wordwrap: false,
+		selectors: ["h1", "h2", "h3", "h4", "h5", "h6", "table", "tr", "td", "th"].map(
+			(selector) => ({
+				selector,
+				format: "skip",
+			}),
+		),
+	})
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;");
