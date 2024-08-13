@@ -35,7 +35,7 @@
 		<meta name="description" content={shortenedDesc} />
 		<meta property="og:title" content="{data.post.metadata.title} // Pyro Engineering" />
 		<meta property="og:description" content={shortenedDesc} />
-		<meta property="og:image" content={opengraphBg} />
+		<meta property="og:image" content={data.post.metadata.image} />
 		<meta
 			property="og:url"
 			content="https://pyro.engineering/posts/{toSlug(data.post.metadata.title)}"
