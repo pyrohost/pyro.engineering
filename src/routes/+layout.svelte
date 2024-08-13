@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import Navbar from "$lib/components/global/Navbar.svelte";
 	import LogoWordmark from "$lib/components/logos/LogoWordmark.svelte";
 	import "@fontsource/ibm-plex-mono";
@@ -16,7 +17,11 @@
 		"Shine bright."
     ];
 
-    $: randomMessage = messages[Math.floor(Math.random() * messages.length)];
+	let randomMessage = '';
+
+	onMount(() => {
+		randomMessage = messages[Math.floor(Math.random() * messages.length)];
+	});
 </script>
 
 <Navbar isFirefox={data.ua?.toLowerCase().includes("firefox")} />
