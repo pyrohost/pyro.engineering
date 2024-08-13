@@ -8,17 +8,34 @@
 
 <svelte:head>
 	<title>Pyro Engineering</title>
+	<meta
+		name="description"
+		content="Pyro develops gaming’s most advanced software. We're makers at heart, and this is our story."
+	/>
+	<meta property="og:title" content="Pyro // Engineering" />
+	<meta
+		property="og:description"
+		content="Pyro develops gaming’s most advanced software. We're makers at heart, and this is our story."
+	/>
+	<meta property="og:image" content={ferosBg} />
+	<meta property="og:url" content="https://pyro.engineering" />
+	<meta property="og:type" content="website" />
+	<meta name="theme-color" content="#ff4438" />
 </svelte:head>
 
 <div
 	style="background-image: url({ferosBg}); background-size: cover; background-position: center;"
-	class="hidden xl:flex flex-col xl:flex-row h-fit w-full items-center border-b border-dashed border-neutral-800 px-8 py-7 text-white [&>*]:leading-normal"
+	class="hidden h-fit w-full flex-col items-center border-b border-dashed border-neutral-800 px-8 py-7 text-white xl:flex xl:flex-row [&>*]:leading-normal"
 >
-	<h1 class="w-full xl:max-w-[calc(50%-2px)] flex-shrink-0 flex-grow xl:pr-32 text-left text-2xl xl:text-3xl font-bold mb-4">
+	<h1
+		class="mb-4 w-full flex-shrink-0 flex-grow text-left text-2xl font-bold xl:max-w-[calc(50%-2px)] xl:pr-32 xl:text-3xl"
+	>
 		Pyro develops gaming’s most advanced software.
 	</h1>
-	<div class="hidden xl:block h-16 w-0.5 flex-shrink-0 bg-white/30" />
-	<h1 class="w-full xl:max-w-[calc(50%-2px)] flex-shrink-0 flex-grow xl:pl-32 text-right text-2xl xl:text-3xl font-bold">
+	<div class="hidden h-16 w-0.5 flex-shrink-0 bg-white/30 xl:block" />
+	<h1
+		class="w-full flex-shrink-0 flex-grow text-right text-2xl font-bold xl:max-w-[calc(50%-2px)] xl:pl-32 xl:text-3xl"
+	>
 		We're makers at heart, and this is our story.
 	</h1>
 </div>
