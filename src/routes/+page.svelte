@@ -18,6 +18,7 @@
 		property="og:description"
 		content="Pyro develops gaming’s most advanced software. We're makers at heart, and this is our story."
 	/>
+	<meta name="twitter:card" content="summary_large_image">
 	<meta property="og:image" content={opengraphBg} />
 	<meta property="og:url" content="https://pyro.engineering" />
 	<meta property="og:type" content="website" />
