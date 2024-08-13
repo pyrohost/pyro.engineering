@@ -80,7 +80,14 @@ export const getAllPosts = async (): Promise<Post[]> => {
 	return posts
 		.filter((p): p is Post => !!p.metadata)
 		.map((post, i) => {
-			const metadata = { ...post.metadata, date: new Date(post.metadata.date) };
+			const metadata = {
+				...post.metadata,
+				date: new Date(
+					typeof (post.metadata.date as string | Date) === "string"
+						? new Date(post.metadata.date.toString().replace(/-/g, "/"))
+						: new Date(post.metadata.date),
+				),
+			};
 			const key = postKeys[i];
 			metadata.image =
 				findAssetByFilename(
