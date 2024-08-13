@@ -17,7 +17,7 @@
 		property="og:description"
 		content="Pyro develops gaming’s most advanced software. We're makers at heart, and this is our story."
 	/>
-	<meta property="og:image" content={ferosBg} />
+	<meta property="og:image" content="https://pyro.engineering{ferosBg}" />
 	<meta property="og:url" content="https://pyro.engineering" />
 	<meta property="og:type" content="website" />
 	<meta name="theme-color" content="#ff4438" />
