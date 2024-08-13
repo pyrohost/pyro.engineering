@@ -42,7 +42,7 @@
 		src={post.image}
 		alt="Post"
 		class={clsx("object-cover", {
-			"h-[500px] w-full": large,
+			"h-[220px] md:h-[500px] w-full": large,
 			"max-h-48 w-1/2": !large,
 		})}
 	/>
