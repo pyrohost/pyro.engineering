@@ -13,25 +13,23 @@ Our journey was challenging. We spent over six months meticulously rebuilding th
 
 This drive led us to explore new technologies and methodologies, challenging the legacy systems that had long constrained the industry. The Pterodactyl fork was our launching pad, but it was not our final destination.
 
-## Embracing Community-Driven Development
-
-To truly innovate and lead the industry forward, we recognized the need to free ourselves from legacy frameworks and embrace the collective intelligence of the community. This realization led us to an important decision: it was time for Pyrodactyl to become a community-driven project.
-
-We believe that by handing over the reins to the community, we can foster an environment where creativity and innovation thrive without limitations. This transition represents a significant step in our broader strategy to push the boundaries of what’s possible in hosting.
-
-## Relicensing to AGPLv3
+## The Decision to Relicense
 
 In alignment with our core values of transparency and community empowerment, we have chosen to relicense Pyrodactyl under the GNU Affero General Public License version 3 (AGPLv3). This decision reflects our deep commitment to open-source principles and ensures that Pyrodactyl remains free and accessible.
 
-Key benefits of the AGPLv3 license:
+We chose the AGPLv3 license because it:
 
 1. Mandates that modifications, improvements, or derivative works are shared with the community
 2. Ensures the hosting industry continues to benefit from collective advancements
-3. Prevents monopolization of innovations emerging from Pyrodactyl
+3. Prevents the monopolization of innovations emerging from Pyrodactyl
 
 Our choice of AGPLv3 came after carefully considering how best to protect Pyrodactyl’s integrity while encouraging widespread collaboration. We wanted to create a framework where developers, companies, and enthusiasts could contribute to the project, knowing their work would benefit the entire community.
 
 ## Empowering the Community
+
+To truly innovate and lead the industry forward, we recognized the need to free ourselves from legacy frameworks and embrace the collective intelligence of the community. This realization led us to an important decision: it was time for Pyrodactyl to become a community-driven project.
+
+We believe that by handing over the reins to the community, we can foster an environment where creativity and innovation thrive without limitations. This transition represents a significant step in our broader strategy to push the boundaries of what’s possible in hosting.
 
 In conjunction with relicensing, we are transitioning Pyrodactyl’s development to a community-driven model. We have granted multiple community members maintainer access to the Pyrodactyl repository, giving them the authority to steer the project in new directions and ensure its continued growth and success.
 
