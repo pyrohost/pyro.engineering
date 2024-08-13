@@ -49,7 +49,7 @@
 
 		await tick();
 		const searchQuery = $searchValue.trim();
-		const path = searchQuery ? `/search/${searchQuery}` : "/";
+		const path = searchQuery ? `/search/${encodeURIComponent(searchQuery)}` : "/";
 
 		goto(path, { keepFocus: true });
 	}
@@ -64,7 +64,7 @@
 </script>
 
 <nav
-	class="fixed z-50 flex h-24 w-screen items-center justify-center bg-black/75 md:px-8 backdrop-blur-lg"
+	class="fixed z-50 flex h-24 w-screen items-center justify-center bg-black/75 backdrop-blur-lg md:px-8"
 >
 	<div class="flex h-full w-full max-w-[1400px] items-center justify-center px-4">
 		<div class="flex flex-grow items-center">
