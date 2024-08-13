@@ -1,5 +1,6 @@
 <script lang="ts">
 	import opengraphBg from "$lib/assets/opengraph_image__2_.png";
+	import ferosBg from "$lib/assets/feros-bg.png";
 	import PostsPreview from "$lib/components/landing/PostPreviews.svelte";
 	import type { PageData } from "./$types";
 
@@ -24,7 +25,7 @@
 </svelte:head>
 
 <div
-	style="background-image: url({opengraphBg}); background-size: cover; background-position: center;"
+	style="background-image: url({ferosBg}); background-size: cover; background-position: center;"
 	class="hidden h-fit w-full flex-col items-center border-b border-dashed border-neutral-800 px-8 py-7 text-white xl:flex xl:flex-row [&>*]:leading-normal"
 >
 	<h1
