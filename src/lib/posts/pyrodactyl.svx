@@ -45,3 +45,8 @@ Let us be clear: Pyro is here to stay. We're not going anywhere. In fact, we're 
 
 We invite you to join us on this exciting journey. Whether you're a developer, a company, or an enthusiast, there's a place for you in our community. Together, we'll push the boundaries of what's possible in hosting, creating solutions that are more powerful, more accessible, and more aligned with the needs of users and businesses alike.
 Thank you for being a part of this chapter in our story. The best is yet to come, and we can't wait to shape the future of hosting with you by our side.
+
+<figure>
+    <img src="/nexus.png" alt="Pre-release screenshot of a server interface">
+    <figcaption>Pre-release screenshot of a server interface. Subject to change.</figcaption>
+</figure>
