@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import AuthorAvatars from "$lib/components/AuthorAvatars.svelte";
 	import ExclamationIcon from "virtual:icons/heroicons-solid/exclamation-triangle";
 
 	let error = $page.error;

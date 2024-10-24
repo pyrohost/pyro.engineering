@@ -1,5 +1,6 @@
 <script lang="ts">
 	import PostPreview from "$lib/components/landing/PostPreview.svelte";
+	import QuestionMarkCircleIcon from "virtual:icons/heroicons-solid/question-mark-circle";
 	import { searchValue } from "$lib/store";
 	import clsx from "clsx";
 	import type { PageData } from "./$types";
@@ -23,3 +24,12 @@
 		<PostPreview half={false} large={false} post={post.metadata} />
 	</div>
 {/each}
+
+{#if data.posts.length === 0}
+	<div class="flex flex-col items-center justify-center p-8">
+		<QuestionMarkCircleIcon class="h-16 w-16 text-neutral-500" />
+		<p class="mt-4 text-center text-lg text-neutral-500">
+			No posts found for "{data.query}". Try searching for something else.
+		</p>
+	</div>
+{/if}
