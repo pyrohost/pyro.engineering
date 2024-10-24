@@ -33,7 +33,7 @@
 		{@const shortenedDesc =
 			description.length > 160 ? `${description.slice(0, 160)}...` : description}
 		<meta name="description" content={shortenedDesc} />
-		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:card" content="summary_large_image" />
 		<meta property="og:title" content="{data.post.metadata.title} // Pyro Engineering" />
 		<meta property="og:description" content={shortenedDesc} />
 		<meta property="og:image" content={data.post.metadata.image} />
