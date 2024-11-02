@@ -1,7 +1,5 @@
 import type { PostMetadata } from "$lib/util";
-import { readFile } from "fs/promises";
 import { compile } from "mdsvex";
-import path from "path";
 
 interface TextPost {
 	code: string;
@@ -9,9 +7,12 @@ interface TextPost {
 }
 
 export const getAllPostsText = async (): Promise<TextPost[]> => {
-	const posts = import.meta.glob("/src/lib/posts/*.svx");
+	const posts = import.meta.glob("/src/lib/posts/*.svx", {
+		query: "?raw",
+		import: "default",
+	});
 	const postPromises = Object.keys(posts).map(async (postPath) => {
-		const content = await readFile(path.join(process.cwd(), postPath), "utf-8");
+		const content = (await posts[postPath]()) as string;
 		const compiled = await compile(content);
 
 		if (!compiled || typeof compiled.code !== "string" || !compiled.data?.fm) {

@@ -6,12 +6,6 @@ interface PostMetadata {
 	date: string;
 	[key: string]: any;
 }
-
-interface Post {
-	code: string;
-	metadata: PostMetadata;
-}
-
 export async function GET() {
 	try {
 		const postsRendered = await getAllPostsText();
