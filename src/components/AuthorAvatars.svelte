@@ -8,7 +8,7 @@
 <div class="flex items-center">
   {#each authors as author, i}
     <a
-      href="/author/{toSlug(getAuthor(author.name).name)}"
+      href="/author/{toSlug(author.name)}"
       class="group relative -ml-3 first:ml-0"
     >
       <img
