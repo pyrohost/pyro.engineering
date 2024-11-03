@@ -1,0 +1,60 @@
+---
+	import Navbar from "../components/global/Navbar.tsx";
+	import LogoWordmark from "../components/logos/LogoWordmark.svelte";
+	import "@fontsource/ibm-plex-mono";
+	import "../app.css";
+
+	const messages = [
+		"Thank you for reading.",
+		"What's come before is prologue.",
+		"Find your flow.",
+		"Stay awhile and listen.",
+		"Welcome to the future.",
+		"Shine bright."
+    ];
+
+	const randomMsg = () => {
+		return messages[Math.floor(Math.random() * messages.length)];
+	}
+---
+
+<html>
+	<head>
+		<title>Pyro Engineering</title>
+		<meta
+			name="description"
+			content="Pyro develops gaming’s most advanced software. We're makers at heart, and this is our story."
+		/>
+		<meta property="og:title" content="Pyro // Engineering" />
+		<meta
+			property="og:description"
+			content="Pyro develops gaming’s most advanced software. We're makers at heart, and this is our story."
+		/>
+		<meta name="twitter:card" content="summary_large_image">
+		<meta property="og:image" content='/og.png' />
+		<meta property="og:url" content="https://pyro.engineering" />
+		<meta property="og:type" content="website" />
+		<meta name="theme-color" content="#ff4438" />
+	</head>
+	<body>
+		<!-- check for firefox -->
+		<Navbar isFirefox={false} />
+	
+	<div class="flex w-screen justify-center pb-72">
+		<div
+			class="mt-24 h-fit w-full max-w-[1400px] overflow-hidden border border-dashed border-neutral-800 bg-black relative z-10"
+		>
+			<slot />
+		</div>
+	</div>
+	<footer class="mx-auto text-opacity-50 text-white left-0 right-0 max-w-[1400px] w-full fixed bottom-0 py-32 px-2">
+		<div class="mx-auto w-fit text-sm">
+			{randomMsg}
+		</div>
+		<div class="mx-auto w-fit text-sm">
+			Copyright © {new Date().getFullYear()} Pyro Host Inc.
+		</div>
+	</footer>
+	
+	</body>
+</html>
