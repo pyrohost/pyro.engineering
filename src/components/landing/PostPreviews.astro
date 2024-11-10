@@ -1,27 +1,26 @@
 ---
 import clsx from "clsx";
 import PostPreview from "./PostPreview.astro";
-import {Icon} from "astro-icon/components";
+import { Icon } from "astro-icon/components";
 import type { posts } from "../../content/config";
 
-interface Props {
-  posts: posts[];
-}
 
-const { posts } = Astro.props;
+
+const props = Astro.props;
+const { posts } = props;
 ---
 
 <div class="h-fit w-full">
   {
-    posts.length > 0 ? (
+    props.posts.length > 0 ? (
       Array.from({ length: Math.ceil(posts.length / 3) }).map((_, i) => {
         const bigIndex = i * 3;
         const leftSmallIndex = bigIndex + 1;
         const rightSmallIndex = bigIndex + 2;
 
-        const post = posts[bigIndex];
-        const leftPost = posts[leftSmallIndex];
-        const rightPost = posts[rightSmallIndex];
+        const post = posts[bigIndex]
+        const leftPost = posts[leftSmallIndex]
+        const rightPost = posts[rightSmallIndex]
 
         return (
           <div class="h-full w-full">

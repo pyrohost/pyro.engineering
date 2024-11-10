@@ -8,9 +8,21 @@ import Icons from 'astro-icon';
 import react from '@astrojs/react';
 
 
+import node from '@astrojs/node';
+
+
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://pyro.engineering',
-    integrations: [mdx(), sitemap(), svelte(), tailwind(), Icons(), react()],
-    output: 'server'
+  site: 'https://pyro.engineering',
+  integrations: [mdx(), sitemap(), svelte(), tailwind(), react(), Icons({
+    include: {
+      // logos: ['*'],
+      // lucide: ['globe', 'rss']
+    }
+  })],
+  output: 'server',
+
+  adapter: node({
+    mode: 'standalone'
+  })
 });

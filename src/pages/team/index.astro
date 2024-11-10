@@ -1,0 +1,13 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import Card from "../../components/team/card.astro"
+
+const team = await getCollection("authors")
+---
+
+<Base title="Posts" description="Posts">
+ <div class="flex flex-wrap gap-4 columns-4">
+    {team.map((member) => <Card {...member} />)}
+ </div>
+</Base>

@@ -26,7 +26,7 @@ export const authors:Author[] = [
   },
   {
     name: "Emma",
-    image: "/authors/Ivy.jpg",
+    image: "/authors/Emma.jpg",
   },
   {
 	name: "Lio",

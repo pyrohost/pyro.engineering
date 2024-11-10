@@ -1,0 +1,13 @@
+---
+const { image, caption, alt } = Astro.props;
+---
+
+<figure class="my-8  border-neutral-700">
+  <img
+    src={image}
+    alt={alt ? alt : caption}
+    class="mb-4 w-full object-cover border-dashed border-neutral-800 border-b"
+  />
+  <figcaption class="text-sm text-center text-neutral-400">{caption}</figcaption>
+</figure>
+

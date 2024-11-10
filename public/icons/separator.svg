@@ -1,0 +1,15 @@
+<svg 
+  class="opacity-50"
+  height="32"
+  role="separator"
+  viewBox="0 0 32 32"
+  width="32"
+  xmlns="http://www.w3.org/2000/svg"
+>
+    <path
+      d="M22 5L9 28"
+      stroke="white"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+</svg>

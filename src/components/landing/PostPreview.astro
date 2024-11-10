@@ -1,28 +1,16 @@
 ---
 import toSlug from "../../lib/utils/toSlug";
 import clsx from "clsx";
-// @ts-ignore
-import AuthorAvatars from "../AuthorAvatars.svelte";
-import { getAuthor, getAuthors, type Author } from "../../lib/constants/authors";
+import AuthorAvatars from "../AuthorAvatars.astro";
+import { getAuthors } from "../../lib/constants/authors";
+import formatDate from "../../lib/utils/formatDate";
 
-const formatDate = (date: Date) => {
-  // format the date so its like:
-  // "Sep. 8 2024"
-  // "Jan. 28 2022"
-  const month = date.toLocaleString("default", { month: "short" });
-  const day = date.getDate();
-  const year = date.getFullYear();
-  return `${month}. ${day} ${year}`;
-};
-const props = Astro.props;
+const { half, large, ...props } = Astro.props;
 const post = props.post.data
-const half = props.half
-const large = props.large
 
 const authors = getAuthors(post.authors)
 const formattedDate = formatDate(new Date(post.date));
-
-console.log("post", post);
+const postLink = `/posts/${toSlug(props.post.slug)}`
 ---
 
 <div
@@ -54,7 +42,7 @@ console.log("post", post);
       })}
     >
       <a
-        href={`/posts/${toSlug(post.title)}`}
+        href={postLink}
         class={clsx("font-bold hover:underline", {
           "w-full xl:w-1/2 text-4xl leading-tight": large,
           "text-2xl": !large,
