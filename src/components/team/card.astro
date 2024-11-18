@@ -31,7 +31,7 @@ const socials = socialSites(author.socials) || []
       {author.description}
     {
       socials && socials.length > 0 && (
-        <div class="flex gap-2 pt-4 relative bottom-0">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 text-center  gap-2 pt-4 relative bottom-0">
           {socials.map((site) => (
             <a href={site.link} target="_blank" rel="noopener noreferrer">
               <Icon name={site.icon} class="w-12 h-12 mr-2 " />
