@@ -5,11 +5,11 @@ type Social = {
 export default function socialSites(socials: Social): { name: string; icon: string; link: string; }[] {
   const sites = []
   if (!socials) return []
-  for (const [key, value] of Object.entries(socials)) {
+  for (let [key, value] of Object.entries(socials)) {
+    if (key === "mastodon") value = value.replace(/(?<user>@[a-zA-Z0-9]*)(?<server>@[\w\W]*)/, "https://$2/$1")
     if (value) {
       sites.push({
         name: key,
-// fix github icon at some point 
         icon: key !== 'website' ? `simple-icons:${key}` : `lucide:globe`, 
         link: value,
       })

@@ -34,9 +34,12 @@ export async function getStaticPaths() {
 	const formattedDate = formatDate(new Date(data.date))
 	const authorCollection = await getCollection('authors')
 	const authors = authorCollection.filter((author) => entry.data.authors.includes(author.data.name)).map((author) => author.data)
+	const fediLink = authors.find((author) => author.socials?.mastodon)?.socials?.mastodon
 ---
 
-<Base title={entry.data.title} description={entry.data.description} image={entry.data.image} >
+<Base title={entry.data.title} description={entry.data.description} image={entry.data.image} fediverseCreator={
+	fediLink
+} >
 <div class="mx-auto max-w-4xl px-8 py-8">
 	<h1 class="mb-6 text-4xl font-bold md:text-5xl md:leading-[120%]">
 		{data.title}

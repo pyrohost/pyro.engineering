@@ -3,6 +3,7 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  fediverseCreator?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -11,6 +12,7 @@ let {
   title = "Pyro Engineering",
   description = "Pyro develops gaming’s most advanced software. We're makers at heart, and this is our story.",
   image = "/og.png",
+  fediverseCreator,
 } = Astro.props;
 if (description.length === 0) description = "Pyro Engineering";
 if (title !== "Pyro Engineering") title = `${title} | Pyro Engineering`;
@@ -52,6 +54,13 @@ if (title !== "Pyro Engineering") title = `${title} | Pyro Engineering`;
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
   <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+  <!-- Fediverse Metadata -->
+  {
+    fediverseCreator && (
+      <meta name="fediverse:creator" content={fediverseCreator} />
+    )
+  }
 
   <!-- Global Metadata -->
   <meta name="theme-color" content="#ff4438" />
