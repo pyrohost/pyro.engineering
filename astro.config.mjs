@@ -18,7 +18,7 @@ export default defineConfig({
       // lucide: ['globe', 'rss']
     }
   })],
-  output: 'server',
+  output: 'hybrid',
 
   adapter: cloudflare()
 });
