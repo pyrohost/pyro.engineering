@@ -1,13 +1,29 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { getCollection } from "astro:content";
-import Card from "../../components/team/card.astro"
+import Card from "../../components/team/card.astro";
+const getOrder = (category: "c" | "frontend" | "backend" | undefined) => {
+  switch (category) {
+    case "c":
+      return 1;
+    case "frontend":
+      return 2;
+    case "backend":
+      return 3;
+    default:
+      return 999; // handle any unexpected categories
+  }
+};
 
-const team = await getCollection("authors")
+const authors = await getCollection("authors");
+
+const team = authors.sort((a, b) => {
+  return getOrder(a.data.category) - getOrder(b.data.category);
+});
 ---
 
-<Base title="Posts" description="Posts">
- <div class="flex flex-wrap gap-4 columns-4">
+<Base title="The Team" description="The People behind Pyro">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 content-evenly">
     {team.map((member) => <Card {...member} />)}
- </div>
+  </div>
 </Base>

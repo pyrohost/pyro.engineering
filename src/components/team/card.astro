@@ -1,36 +1,37 @@
 ---
 import { Icon } from "astro-icon/components";
-import { type authors } from "../../content/config";
+import { type Author } from "../../content/config";
 import socialSites from "../../lib/utils/socialSites";
 
 const props = Astro.props;
-const author = props.data as authors;
+const author: Author = props.data;
+
 const socials = socialSites(author.socials) || []
 ---
 
-<div class="max-w-sm border border-dashed border-neutral-800 m-8">
-  <a href={`/team/${author.name}`}>
+<div class="max-w-auto border border-dashed border-neutral-800 m-8 p-4">
+  <a href={`/team/${props.id}`}>
     <img
-      class="max-h-40 w-full object-contain"
+      class="max-h-48 w-full object-cover"
       src={author.image}
       alt={author.name}
     />
   </a>
-  <div class="p-5">
+  <div class="p-5 static">
     <h1 class="mb-2 text-2xl font-bold tracking-tight text-white">
-      <a href={`/team/${author.name}`}>
+      <a href={`/team/${props.id}`}>
         {author.name}
       </a>
     </h1>
     <p class="mb-1 font-normal text-gray-400">
-      {author.description}
-    </p>
-    <p class="mb-1 font-normal text-gray-400">
       {author.position}
     </p>
+    <p class="mb-1 font-normal text-gray-400">
+    </p>
+      {author.description}
     {
       socials && socials.length > 0 && (
-        <div class="flex gap-2 pt-4">
+        <div class="flex gap-2 pt-4 relative bottom-0">
           {socials.map((site) => (
             <a href={site.link} target="_blank" rel="noopener noreferrer">
               <Icon name={site.icon} class="w-12 h-12 mr-2 " />
@@ -41,18 +42,3 @@ const socials = socialSites(author.socials) || []
     }
   </div>
 </div>
-
-<!-- <div class="flex flex-col gap-2">
-    <img class="w-24 h-24" src={author.image} alt={author.name} />
-    <h3>{author.name}</h3>
-    <p>{author.description}</p>
-    <p>{author.position}</p>
-    <div class="flex gap-2">
-        {
-            socials.map((site) => (
-                <a href={site.link} target="_blank" rel="noopener noreferrer">
-                   <Icon name={site.icon} class="w-6 h-6" />
-                </a>
-            ))
-        }
-</div> -->

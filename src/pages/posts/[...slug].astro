@@ -31,8 +31,8 @@ export async function getStaticPaths() {
 	const data = entry.data
 	const { Content } = await entry.render();
 	const formattedDate = formatDate(new Date(data.date))
-	const authors:Author[] = getAuthors(data.authors)
-
+	const authorCollection = await getCollection('authors')
+	const authors = authorCollection.filter((author) => entry.data.authors.includes(author.data.name)).map((author) => author.data)
 ---
 
 <Base title={entry.data.title} description={entry.data.description} image={entry.data.image} >
@@ -52,7 +52,7 @@ export async function getStaticPaths() {
 					<div class="mr-3 hidden h-4 w-px bg-neutral-700 sm:block"></div>
 					<a
 						class="flex items-center gap-2.5 hover:underline"
-						href={`/author/${toSlug(getAuthor(data.authors[0]).name)}`}
+						href={`/team/${toSlug(getAuthor(data.authors[0]).name)}`}
 					>
 						<img
 							src={getAuthor(data.authors[0]).image}

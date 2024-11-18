@@ -1,3 +1,85 @@
+---
+export const prerender = true;
+import PostPreview from "../../components/landing/PostPreview.astro";
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import socialSites from "../../lib/utils/socialSites";
+import { Icon } from "astro-icon/components";
+// @ts-ignore
+import clsx from "clsx";
+
+export async function getStaticPaths() {
+  const authors = await getCollection("authors");
+  return authors.map((author) => ({
+    params: { name: author.id },
+    props: { author },
+  }));
+}
+
+const { author } = Astro.props;
+const posts = await getCollection("posts", (post) =>
+  post.data.authors.includes(author.data.name)
+);
+const socials = socialSites(author.data.socials) || [];
+---
+
+<Base>
+	<h1 class="px-8 pt-6 text-4xl font-bold">
+		Posts by
+	</h1>
+  <div class="flex flex-col md:flex-row items-center">
+
+    <img
+      class="p-8 pb-0"
+      width="320"
+      src={author.data.image}
+      alt={author.data.name}
+    />
+    <div>
+      <div class="">
+        <h1 class="text-4xl font-bold">{author.data.name}</h1>
+        <p class="text-xl">{author.data.position}</p>
+        <p class="text-xl">{author.data.description}</p>
+      </div>
+      <ul class="pt-8 flex flex-wrap gap-2">
+        {
+          socials.map((site) => (
+            <li>
+              <a href={site.link} target="_blank" rel="noopener noreferrer">
+                <Icon name={site.icon} class="w-12 h-12 mr-2 " />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+  <br />
+  <br />
+  <ul>
+    {
+      posts.length > 0 ? (
+        posts.map((post, i) => (
+          <div
+            class={clsx("w-full border-dashed border-neutral-800", {
+              "border-b": i !== posts.length - 1,
+              "border-t": i === 0,
+            })}
+          >
+            <PostPreview post={post} />
+          </div>
+        ))
+      ) : (
+        <div class={"w-full border-dashed border-neutral-800 border-t p-5"}>
+          <p class="ml-2 font-bold ">
+            {author.data.name} has not posted anything yet.
+          </p>
+        </div>
+      )
+    }
+  </ul>
+</Base>
+
 <!-- <script lang="ts">
 	import clsx from "clsx";
 	import type { PageData } from "./$types";

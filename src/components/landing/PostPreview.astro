@@ -2,13 +2,13 @@
 import toSlug from "../../lib/utils/toSlug";
 import clsx from "clsx";
 import AuthorAvatars from "../AuthorAvatars.astro";
-import { getAuthors } from "../../lib/constants/authors";
 import formatDate from "../../lib/utils/formatDate";
+import { getCollection } from "astro:content";
 
 const { half, large, ...props } = Astro.props;
 const post = props.post.data
-
-const authors = getAuthors(post.authors)
+const authorCollection = await getCollection('authors')
+const authors = authorCollection.filter((author) => post.authors.includes(author.data.name)).map((author) => author.data)
 const formattedDate = formatDate(new Date(post.date));
 const postLink = `/posts/${toSlug(props.post.slug)}`
 ---
@@ -53,7 +53,7 @@ const postLink = `/posts/${toSlug(props.post.slug)}`
           {
             authors.length === 1 ? (
               <a
-                href={`/author/${toSlug(authors[0].name)}`}
+                href={`/team/${toSlug(authors[0].name)}`}
                 class="flex items-center gap-3 [&:hover>div]:underline"
               >
                 <img
