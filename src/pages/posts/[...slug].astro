@@ -5,7 +5,6 @@ import AuthorAvatars from "../../components/AuthorAvatars.astro"
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import formatDate from "../../lib/utils/formatDate";
-import { getAuthor, getAuthors, type Author } from "../../lib/constants/authors";
 import toSlug from "../../lib/utils/toSlug";
 // Components for posts
 import h1 from "../../components/posts/h1.astro";
@@ -17,6 +16,8 @@ import h6 from "../../components/posts/h6.astro";
 import a from "../../components/posts/a.astro";
 import p from "../../components/posts/p.astro";
 import img from "../../components/posts/img.astro";
+import ol from "../../components/posts/ol.astro";
+import li from "../../components/posts/li.astro";
 import Figure from "../../components/posts/figure.astro";
 
 export async function getStaticPaths() {
@@ -52,17 +53,17 @@ export async function getStaticPaths() {
 					<div class="mr-3 hidden h-4 w-px bg-neutral-700 sm:block"></div>
 					<a
 						class="flex items-center gap-2.5 hover:underline"
-						href={`/team/${toSlug(getAuthor(data.authors[0]).name)}`}
+						href={`/team/${toSlug(authors[0].name)}`}
 					>
 						<img
-							src={getAuthor(data.authors[0]).image}
-							alt={getAuthor(data.authors[0]).name}
+							src={authors[0].image}
+							alt={authors[0].name}
 							class="h-8 w-8 rounded-full object-cover"
 							width="32"
 							height="32"
 						/>
 						<div class="max-w-[200px] truncate text-neutral-400">
-							{getAuthor(data.authors[0]).name}
+							{authors[0].name}
 						</div>
 					</a>
 				) : (
@@ -91,6 +92,8 @@ export async function getStaticPaths() {
 				p: p,
 				a: a,
 				figure: Figure,
+				ol: ol,
+				li: li,
 				img: img
 			}} />
 		</article>
