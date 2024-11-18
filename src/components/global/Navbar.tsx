@@ -90,6 +90,9 @@ const Navigation = () => {
           </a>
         </div>
         <div className="flex flex-shrink-0 items-center gap-6">
+          <a className="btn !h-10 !px-0" href="/team">
+            Team
+          </a>
           <a className="btn !h-10 !px-0" href="/posts">
             Posts
           </a>
