@@ -1,7 +1,9 @@
 name: Lio
-image: /authors/Lio.jpg
+image: /authors/micons/lio.png
 description: chaos cat
 position: frontend & ui
+category: frontend
 socials:
+  website: https://lio.to/
   github: https://lio.to/github
   bluesky: https://lio.to/bsky

@@ -2,6 +2,7 @@ name: Emma
 image: /authors/Emma.jpg
 description: destroyer of codebases
 position: Frontend
+category: frontend
 socials:
   website: https://prpl.wtf
   github: https://github.com/prplwtf

@@ -1,7 +1,8 @@
 name: nullptr
-image: /authors/Maddie.jpg
+image: /authors/micons/Maddie.jpg
 description: mrreeoowwww
 position: frontend engineer
+category: frontend
 socials:
   x: https://x.com/notnullptr
-  bluesky: https://bsky.app/nullp.tr
+  bluesky: https://bsky.app/profile/nullp.tr
