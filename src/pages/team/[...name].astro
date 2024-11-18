@@ -17,18 +17,18 @@ export async function getStaticPaths() {
 }
 
 const { author } = Astro.props;
-const posts = await getCollection("posts", (post) =>
-  post.data.authors.includes(author.data.name)
-);
+const posts = await getCollection("posts", ({ data }) => {
+  return (
+    (import.meta.env.PROD ? data.draft !== true : true) &&
+    data.authors.includes(author.data.name)
+  );
+});
 const socials = socialSites(author.data.socials) || [];
 ---
 
-<Base>
-	<h1 class="px-8 pt-6 text-4xl font-bold">
-		Posts by
-	</h1>
+<Base title={`Posts by ${author.data.name}`}>
+  <h1 class="px-8 pt-6 text-4xl font-bold">Posts by</h1>
   <div class="flex flex-col md:flex-row items-center">
-
     <img
       class="p-8 pb-0"
       width="320"
