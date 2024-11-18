@@ -18,6 +18,9 @@ const posts = defineCollection({
 const authorSchema = z.object({
 	name: z.string(),
 	image: z.string(),
+	category: z.enum([
+		'c', 'frontend', 'backend'
+	]).optional(),
 	description: z.string().optional(),
 	position: z.string().optional(),
 	socials: z.any().optional(),
@@ -28,7 +31,9 @@ const authors = defineCollection({
 	schema: authorSchema
 });
 
-export interface posts extends z.infer<typeof postSchema>{}
-export interface authors extends z.infer<typeof authorSchema>{}
+// export interface Post extends z.infer<typeof postSchema>{}
+// export interface Author extends z.infer<typeof authorSchema>{}
+export type Author = z.infer<typeof authorSchema>;
+export type Post = z.infer<typeof postSchema>;
 
 export const collections = { posts, authors };

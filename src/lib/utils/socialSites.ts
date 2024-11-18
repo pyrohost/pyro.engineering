@@ -2,8 +2,9 @@ type Social = {
   [key: string]: string;
 }
 
-export default function socialSites(socials: Social) {
+export default function socialSites(socials: Social): { name: string; icon: string; link: string; }[] {
   const sites = []
+  if (!socials) return []
   for (const [key, value] of Object.entries(socials)) {
     if (value) {
       sites.push({
@@ -14,6 +15,5 @@ export default function socialSites(socials: Social) {
       })
     }
   }
-  console.log(sites)
   return sites
 }
