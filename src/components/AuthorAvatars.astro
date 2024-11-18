@@ -5,7 +5,7 @@ const { authors } = Astro.props;
 ---
 
 <div class="flex items-center">
-  { authors.map((author:Author) => (
+  { authors.map((author:any) => (
     <a
       href={`/team/${toSlug(author.name)}`}
       class="group relative -ml-3 first:ml-0"
