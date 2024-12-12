@@ -1,3 +1,3 @@
-# pyro.engineering (thermite)
+# Migrated
 
-astro dot build
+Thermite is now integrated into [Nexus](https://github.com/pyrohost/nexus), our Monorepo.
